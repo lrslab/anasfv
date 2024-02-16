@@ -38,7 +38,7 @@ conda install -c bioconda muscle
 
 1. Download all ASFV genomes from NCBI to the "./single_fasta" directory
 ```
-download_asfv_genome.py
+./download_asfv_genome.py
 ```
 2. Merge asfv genome files to one file
 ( If you already have assembled genome, you can skip steps 2-8 )
@@ -51,7 +51,7 @@ NanoFilt all.fastq -q 10 -l 1000 --maxlength 200000 --headcrop 50 > all_trimmed.
 ```
 4. Find nearest genome as ref
 ```
-find_near_ref.py -r allde.fasta -f all_trimmed.fq > near.fasta
+./find_near_ref.py -r allde.fasta -f all_trimmed.fq > near.fasta
 ```
 5. Use near.fasta as ref to generate sam file
 ```
@@ -79,7 +79,7 @@ sed -i '1s/.*/>strain_name/' ./single_fasta/strain_name.fasta
 ``` 
 10. Genome completeness evaluation
 ```
-completeness.py II > completeness.tsv
+./completeness.py II > completeness.tsv
 ```
 11. Get aligenments for uDance
 ( find cds in all genome files from "./single_fasta" and get a "./aligenments" directory as input for uDance )
