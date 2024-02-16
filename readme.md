@@ -6,12 +6,15 @@ The **anasfv** project focuses on analyzing nanopore-sequenced data of PCR-ampli
 1. python: 3.11 (tested). Most Python 3 versions should work.
 2. Software versions tested:
 	 \- Biopython: 1.8.1
+	 \- Pandas: 2.0.3
 	 \- Medaka: 1.11.3
  	 \- Samtools: 1.17
   	 \- BEDTools: 2.26.0
   	 \- Minimap2: 2.17-r941
   	 \- NanoFilt: 2.8.0
   	 \- Homopolish: 0.4.1
+  	 \- Prodigal: 2.6.3
+  	 \- Exonerate: 2.4.0
   	 \- blast: 2.12.0
   	 \- MUSCLE: 5.1
   	 
@@ -19,12 +22,15 @@ The **anasfv** project focuses on analyzing nanopore-sequenced data of PCR-ampli
 Install requirements:
 ```
 pip install biopython
+pip install pandas
 conda install -c bioconda medaka
 conda install -c bioconda samtools
 conda install -c bioconda bedtools
 conda install -c bioconda minimap2
 conda install -c bioconda nanofilt 
 conda install -c conda-forge -c bioconda homopolish=0.4.1=pyhdfd78af_1
+conda install -c bioconda prodigal
+conda install -c bioconda exonerate
 conda install -c bioconda blast
 conda install -c bioconda muscle
 ```
