@@ -84,7 +84,7 @@ sed -i '1s/.*/>strain_name/' ./single_fasta/strain_name.fasta
 11. Get aligenments for uDance
 ( find cds in all genome files from "./single_fasta" and get a "./aligenments" directory as input for uDance )
 ```
-get_cds_alignments.py
+·/get_cds_alignments.py
 ```
 12. Build a tree using uDance
 Perform a tree construction in de-novo mode and an iterative tree construction in tree mode.
