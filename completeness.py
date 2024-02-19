@@ -90,7 +90,7 @@ if __name__ =='__main__':
     p.close()
     p.join()
 
-    print(f'accession_ID\tsize\twith_MGF\twithout_MGF')
+    print('accession_ID\tsize\tprodigal_gene_num\twith_MGF\twithout_MGF')
     for strain in [i[:-4] for i in os.listdir('./prodigal_result') if i.endswith(".fna")]:
         file = f'./prodigal_result/{strain}.fna'
         prodigal_file = list(SeqIO.parse(file, "fasta"))
