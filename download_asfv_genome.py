@@ -55,7 +55,7 @@ if __name__ == "__main__":
     except FileExistsError:
         print("Note: the single_fasta folder already exists and may already contain previously downloaded content.")
 
-    search_term = '((txid10497[organism:exp] AND biomol_genomic[prop])) AND 160000:200000[Sequence Length]'
+    search_term = '((txid10497[organism:exp] AND biomol_genomic[prop])) AND 160000:250000[Sequence Length]'
     download_path='single_fasta/'
     download_genome(search_term,download_path)
 
