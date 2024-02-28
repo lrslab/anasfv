@@ -4,7 +4,7 @@ from Bio import SeqIO
 import os
 import subprocess
 import pandas as pd
-import multiprocessing
+
 
 
 def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
@@ -36,10 +36,11 @@ def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
     for i in range(df_querys.shape[0]):
         if not with_MGF and 'MGF' in df_querys['Subject_id'][i]:
             pass
-        elif df_querys['identity'][i] >= 90 and df_querys['alignment_length'][i] / (
+        elif df_querys['identity'][i] >= 90 and df_querys['alignment_length'][i] / abs(
                 df_querys['s.end'][i] - df_querys['s.start'][i] + 1) > 0.9:
             l_Complete.append(df_querys['Subject_id'][i])
-        elif df_querys['identity'][i] >= 30:
+        elif df_querys['identity'][i] >= 30 and df_querys['alignment_length'][i] / abs(
+                df_querys['s.end'][i] - df_querys['s.start'][i] + 1) > 0.3:
             l_Fragmented.append(df_querys['Subject_id'][i])
 
     l_Fragmented = list(set(l_Fragmented) - set(l_Complete))
@@ -59,6 +60,10 @@ def run_blast(strain, consensus_use):
     file = f'./prodigal_result/{strain}.fna'
     prodigal_file = list(SeqIO.parse(file, "fasta"))
     consensusfile = f'./consensus_ffn/type{consensus_use}_consensus'
+    try:
+        os.makedirs(f'type{consensus_use}_blast')
+    except FileExistsError:
+        pass
     for record in prodigal_file:
         SeqIO.write(record, f"./type{consensus_use}_blast/{record.id}.fasta", "fasta")
         os.system(f"blastn -query ./type{consensus_use}_blast/{record.id}.fasta -out ./type{consensus_use}_blast/{record.id}.blast -db {consensusfile} -outfmt 6 -evalue 1e-5 -num_threads 12")
@@ -67,34 +72,29 @@ def run_blast(strain, consensus_use):
 if __name__ =='__main__':
     import argparse
     parser = argparse.ArgumentParser(description='The consensus cds of genotype II is used by default.')
-    parser.add_argument('consensus', type=str, default='II', help='I or II')
+    parser.add_argument('input', type=str, help='input an ASFV genome file')
+    parser.add_argument('-c', type=str, default='II', help='I or II')
+    
     args = parser.parse_args()
-    consensus_use = args.consensus
+    input_path = args.input
+    consensus_use = args.c
+    single_fasta=os.path.basename(input_path)
+    
 
-    single_fasta_list = [i[:-6] for i in os.listdir("./single_fasta") if i.endswith('.fasta')]
     os.system('rm -rf prodigal_result')
     os.makedirs('prodigal_result')
+    
+    prodigal_cmd = f'prodigal -i {input_path} -o ./prodigal_result/{single_fasta}.gff -f gff -a ./prodigal_result/{single_fasta}.faa -d ./prodigal_result/{single_fasta}.fna'
+    os.system(prodigal_cmd)
 
-    for single_fasta in single_fasta_list:
-        prodigal_cmd = f'prodigal -i ./single_fasta/{single_fasta}.fasta -o ./prodigal_result/{single_fasta}.gff -f gff -a ./prodigal_result/{single_fasta}.faa -d ./prodigal_result/{single_fasta}.fna'
-        os.system(prodigal_cmd)
-
-    try:
-        os.makedirs(f'type{consensus_use}_blast')
-    except FileExistsError:
-        pass
-
-    p = multiprocessing.Pool(60)
-    for strain in [i[:-4] for i in os.listdir('./prodigal_result') if i.endswith(".fna")]:
-        p.apply_async(run_blast, args=(strain, consensus_use))
-    p.close()
-    p.join()
+    
+    run_blast(single_fasta,consensus_use)
 
     print('accession_ID\tsize\tprodigal_gene_num\twith_MGF\twithout_MGF')
-    for strain in [i[:-4] for i in os.listdir('./prodigal_result') if i.endswith(".fna")]:
-        file = f'./prodigal_result/{strain}.fna'
-        prodigal_file = list(SeqIO.parse(file, "fasta"))
-        size = len(SeqIO.read(f'./single_fasta/{strain}.fasta', "fasta"))
-        busco = cal_BUSCO(consensus_use, prodigal_file)
-        busco_without_MGF = cal_BUSCO(consensus_use, prodigal_file, with_MGF=False)
-        print(f'{strain}\t{size}\t{len(prodigal_file)}\t{busco}\t{busco_without_MGF}')
+
+    file = f'./prodigal_result/{single_fasta}.fna'
+    prodigal_file = list(SeqIO.parse(file, "fasta"))
+    size = len(SeqIO.read(input_path, "fasta"))
+    busco = cal_BUSCO(consensus_use, prodigal_file)
+    busco_without_MGF = cal_BUSCO(consensus_use, prodigal_file, with_MGF=False)
+    print(f'{single_fasta}\t{size}\t{len(prodigal_file)}\t{busco}\t{busco_without_MGF}')
