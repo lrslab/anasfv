@@ -103,5 +103,6 @@ sed -i '1s/.*/>strain_name/' ./single_fasta/strain_name.fasta
 ./get_cds_alignments.py
 ```
 6. Build a tree using uDance
+
 Perform a tree construction in de-novo mode and an iterative tree construction in tree mode.
 Refer to [uDance](https://github.com/balabanmetin/uDance)
