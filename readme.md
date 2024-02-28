@@ -1,5 +1,13 @@
 
-The **anasfv** project focuses on analyzing nanopore-sequenced data of PCR-amplified African Swine Fever Virus (ASFV). The workflow accepts fastq files as input and produces three main outputs: an assembled genome, a genome completeness evaluation similar to BUSCO, and a phylogenetic tree.
+The **anasfv** project focuses on analyzing nanopore-sequenced data of PCR-amplified African Swine Fever Virus (ASFV). 
+
+The workflow consists of two parts:
+
+Part 1:
+Using nanopore-sequenced data of PCR-amplified ASFV to assemble a genome.
+
+Part 2:
+Analyzing the completeness of the assembled ASFV genome, checking for any evidence of recombination between genotypes I and II, and constructing a phylogenetic tree.
 
 ## Requirements:
 
@@ -35,57 +43,65 @@ conda install -c bioconda blast
 conda install -c bioconda muscle
 ```
 ## Workflow Example:
-
-1. Download all ASFV genomes from NCBI to the "./single_fasta" directory
+### Part 1 (Assembling a genome):
+1. Download all ASFV genomes from NCBI to the "./single_fasta" directory.
 ```
 ./download_asfv_genome.py
 ```
-2. Merge asfv genome files to one file
-( If you already have assembled genome, you can skip steps 2-8 )
+2. Merge asfv genome files to one file.
 ```
 cat single_fasta/*.fasta > allde.fasta
 ```
-3. Trimming
+3. Trimming.
 ```
 NanoFilt all.fastq -q 10 -l 1000 --maxlength 200000 --headcrop 50 > all_trimmed.fq
 ```
-4. Find nearest genome as ref
+4. Find nearest genome as ref.
 ```
 ./find_near_ref.py -r allde.fasta -f all_trimmed.fq > near.fasta
 ```
-5. Use near.fasta as ref to generate sam file
+5. Use near.fasta as ref to generate sam file.
 ```
 minimap2 -a near.fasta ./all_trimmed.fq > all-alignment.sam
 ```
-6. Generate consensus file
+6. Generate consensus file.
 ```
 samtools view -b -F 4 all-alignment.sam > all-alignment.bam
 samtools sort -@ 8 -o all-sorted_alignment.bam all-alignment.bam
 samtools consensus -f fasta all-sorted_alignment.bam -o all-assembled.fa
 ```
-7. Polish with medaka
+7. Polish with medaka.
 ```
 medaka_consensus -i all_trimmed.fq -d all-assembled.fa -o all-assembly_medaka_result -m r941_min_fast_g303 -t 2 > medaka.log
 ```
-8. Polish with homopolish
+8. Polish with homopolish.
 ( get a final genome)
 ```
 homopolish polish -a ./all-assembly_medaka_result/consensus.fasta -l ./near.fasta -m R9.4.pkl -o homopolish-output
 ```
-9. Rename final_genome file and move it to the "./single_fasta" directory.
+9. Rename final genome file and move it to the "./single_fasta" directory for Part 2 analysis.
 ```
 cp ./homopolish_output/consensus_homopolished.fasta ./single_fasta/strain_name.fasta
 sed -i '1s/.*/>strain_name/' ./single_fasta/strain_name.fasta
 ``` 
-10. Genome completeness evaluation
+### Part 2 (Analyzing assembled genome and constructing tree):
+1. Download all ASFV genomes from NCBI to the "./single_fasta" directory (If it has already been downloaded in Part 1, please ignore this step).
 ```
-./completeness.py II > completeness.tsv
+./download_asfv_genome.py
 ```
-11. Get aligenments for uDance
+2. Genome completeness evaluation (OQ504956.1 as example).
+```
+./completeness.py ./single_fasta/OQ504956.1.fasta -c II > OQ504956.1_completeness.tsv
+```
+3. recombination test (OQ504956.1 as example).
+```
+./recombination_test.py ./single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
+```
+5. Get aligenments for uDance
 ( find cds in all genome files from "./single_fasta" and get a "./aligenments" directory as input for uDance )
 ```
 ./get_cds_alignments.py
 ```
-12. Build a tree using uDance
+6. Build a tree using uDance
 Perform a tree construction in de-novo mode and an iterative tree construction in tree mode.
 Refer to [uDance](https://github.com/balabanmetin/uDance)
