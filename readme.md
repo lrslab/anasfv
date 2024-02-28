@@ -84,7 +84,7 @@ homopolish polish -a ./all-assembly_medaka_result/consensus.fasta -l ./near.fast
 cp ./homopolish_output/consensus_homopolished.fasta ./single_fasta/strain_name.fasta
 sed -i '1s/.*/>strain_name/' ./single_fasta/strain_name.fasta
 ``` 
-### Part 2 (Analyzing assembled genome and constructing tree):
+### Part 2 (Analyzing genomes and constructing a tree):
 1. Download all ASFV genomes from NCBI to the "./single_fasta" directory (If it has already been downloaded in Part 1, please ignore this step).
 ```
 ./download_asfv_genome.py
@@ -97,12 +97,12 @@ sed -i '1s/.*/>strain_name/' ./single_fasta/strain_name.fasta
 ```
 ./recombination_test.py ./single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
 ```
-5. Get aligenments for uDance
+5. Get aligenments for uDance.
 ( find cds in all genome files from "./single_fasta" and get a "./aligenments" directory as input for uDance )
 ```
 ./get_cds_alignments.py
 ```
-6. Build a tree using uDance
+6. Build a tree using uDance.
 
 Perform a tree construction in de-novo mode and an iterative tree construction in tree mode.
 Refer to [uDance](https://github.com/balabanmetin/uDance)
