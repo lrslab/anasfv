@@ -14,7 +14,6 @@ except ImportError:
 import subprocess
 import sys
 import signal
-import multiprocessing
 from collections import OrderedDict
 import os
 import pandas as pd
@@ -207,11 +206,5 @@ if __name__=="__main__":
     get_unaligned_cds(all_cds,output_dir)
     
     
-    def run_muscle(file):
-        os.system(f'muscle -align ./unaligned_cds/{file} -output ./alignments/{file}')
-    p = multiprocessing.Pool(70)
     for file in os.listdir('./unaligned_cds'):
-        p.apply_async(run_muscle, args=(file,))
-    p.close()
-    p.join()
-
+        os.system(f'muscle -super5 ./unaligned_cds/{file} -output ./alignments/{file} -nt')
