@@ -54,7 +54,7 @@ cat single_fasta/*.fasta > allde.fasta
 ```
 3. Trimming.
 ```
-NanoFilt all.fastq -q 10 -l 1000 --maxlength 200000 --headcrop 50 > all_trimmed.fq
+NanoFilt your_asfv_reads.fastq -q 10 -l 1000 --maxlength 200000 --headcrop 50 > all_trimmed.fq
 ```
 4. Find nearest genome as ref.
 ```
