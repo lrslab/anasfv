@@ -17,6 +17,11 @@ def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
         total_genes = [i for i in total_genes if 'MGF' not in i]
 
     total = len(total_genes)
+    subject_cds=list(SeqIO.parse(f'{consensusfile}.ffn', "fasta"))
+    d_subject_cds={}
+    for cds in subject_cds:
+        d_subject_cds[cds.id]=len(cds.seq)
+        
     for record in prodigal_file:
         try:
             df_query = pd.read_csv(f'./type{consensus_use}_blast/{record.id}.blast', sep='\t', header=None)
@@ -28,19 +33,18 @@ def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
                                      10: 'e-value', 11: 'bit_score'}, inplace=True)
             df_querys = pd.concat([df_querys, df_query.loc[:0]])
 
-        l_Complete = []
-        l_Fragmented = []
-        nMissing = 0
+    l_Complete = []
+    l_Fragmented = []
 
     df_querys = df_querys.reset_index()
     for i in range(df_querys.shape[0]):
         if not with_MGF and 'MGF' in df_querys['Subject_id'][i]:
             pass
-        elif df_querys['identity'][i] >= 90 and df_querys['alignment_length'][i] / abs(
-                df_querys['s.end'][i] - df_querys['s.start'][i] + 1) > 0.9:
+        elif df_querys['Subject_id'][i] in rare_genes:
+            pass
+        elif df_querys['identity'][i]>=90 and df_querys['alignment_length'][i]/d_subject_cds[df_querys['Subject_id'][i]] >0.9:
             l_Complete.append(df_querys['Subject_id'][i])
-        elif df_querys['identity'][i] >= 30 and df_querys['alignment_length'][i] / abs(
-                df_querys['s.end'][i] - df_querys['s.start'][i] + 1) > 0.3:
+        elif df_querys['identity'][i]>=30 and df_querys['alignment_length'][i]/d_subject_cds[df_querys['Subject_id'][i]] >0.3:
             l_Fragmented.append(df_querys['Subject_id'][i])
 
     l_Fragmented = list(set(l_Fragmented) - set(l_Complete))
