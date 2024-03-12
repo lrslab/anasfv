@@ -40,8 +40,6 @@ def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
     for i in range(df_querys.shape[0]):
         if not with_MGF and 'MGF' in df_querys['Subject_id'][i]:
             pass
-        elif df_querys['Subject_id'][i] in rare_genes:
-            pass
         elif df_querys['identity'][i]>=90 and df_querys['alignment_length'][i]/d_subject_cds[df_querys['Subject_id'][i]] >0.9:
             l_Complete.append(df_querys['Subject_id'][i])
         elif df_querys['identity'][i]>=30 and df_querys['alignment_length'][i]/d_subject_cds[df_querys['Subject_id'][i]] >0.3:
