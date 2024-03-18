@@ -43,6 +43,10 @@ conda install -c bioconda blast
 conda install -c bioconda muscle
 ```
 ## Workflow Example:
+Get the number of available processors.
+```
+NPROC=$(nproc)
+```
 ### Part 1 (Assembling a genome):
 1. Download all ASFV genomes from NCBI to the "./single_fasta" directory.
 ```
@@ -67,21 +71,22 @@ minimap2 -a near.fasta ./all_trimmed.fq > all-alignment.sam
 6. Generate consensus file.
 ```
 samtools view -b -F 4 all-alignment.sam > all-alignment.bam
-samtools sort -@ 8 -o all-sorted_alignment.bam all-alignment.bam
+samtools sort -@ ${NPROC} -o all-sorted_alignment.bam all-alignment.bam
 samtools consensus -f fasta all-sorted_alignment.bam -o all-assembled.fa
 ```
-7. Polish with medaka.
+7. Polish with medaka. For model selection, please refer to [medaka](https://github.com/nanoporetech/medaka#Models).
 ```
-medaka_consensus -i all_trimmed.fq -d all-assembled.fa -o all-assembly_medaka_result -m r941_min_fast_g303 -t 2 > medaka.log
+medaka_consensus -i all_trimmed.fq -d all-assembled.fa -o all-assembly_medaka_result -m <suitable_model> -t ${NPROC} > medaka.log
 ```
-8. Polish with homopolish.
-( get a final genome)
+8. Polish with homopolish (model selection: R9.4.pkl/R10.3.pkl).
 ```
-homopolish polish -a ./all-assembly_medaka_result/consensus.fasta -l ./near.fasta -m R9.4.pkl -o homopolish-output
+homopolish polish -a ./all-assembly_medaka_result/consensus.fasta -l ./near.fasta -m <suitable_model> -o homopolish-output
 ```
 9. Rename final genome file and move it to the "./single_fasta" directory for Part 2 analysis.
 ```
+#Rename final genome file and move it to the "./single_fasta" directory
 cp ./homopolish_output/consensus_homopolished.fasta ./single_fasta/strain_name.fasta
+#Change sequence ID
 sed -i '1s/.*/>strain_name/' ./single_fasta/strain_name.fasta
 ``` 
 ### Part 2 (Analyzing genomes and constructing a tree):
