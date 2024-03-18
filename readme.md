@@ -74,7 +74,7 @@ samtools view -b -F 4 all-alignment.sam > all-alignment.bam
 samtools sort -@ ${NPROC} -o all-sorted_alignment.bam all-alignment.bam
 samtools consensus -f fasta all-sorted_alignment.bam -o all-assembled.fa
 ```
-7. Polish with medaka. For model selection, please refer to [medaka](https://github.com/nanoporetech/medaka#Models).
+7. Polish with medaka (For model selection, please refer to [medaka](https://github.com/nanoporetech/medaka#Models) ).
 ```
 medaka_consensus -i all_trimmed.fq -d all-assembled.fa -o all-assembly_medaka_result -m <suitable_model> -t ${NPROC} > medaka.log
 ```
