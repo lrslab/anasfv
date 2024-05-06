@@ -12,7 +12,7 @@ def like_I_or_II(single_fasta,prodigal_file):
     run_blast(single_fasta,'Imore')
     run_blast(single_fasta,'IImore')
     
-    print(f"CDS\tStart\tEnd\tGenotypeI\tGenotypeII\tConclusion\n")
+    print("CDS\tStart\tEnd\tGenotypeI\tGenotypeII\tConclusion")
     for record in prodigal_file:
         
         SeqIO.write(record, f"./prodigal_result/{record.id}.fasta", "fasta")
