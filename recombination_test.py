@@ -49,8 +49,19 @@ def like_I_or_II(single_fasta,prodigal_file):
             
         if not cds:
                 cds=record.id
+        
+        conclusion=''
+        if typei and typeii:
+            if typei > typeii:
+                conclusion='I'
+            elif typei < typeii:
+                conclusion='II'
+        elif typei:
+            conclusion='I'
+        elif typeii:
+            conclusion='II'
                 
-        print(f"{cds}\t{start}\t{end}\t{typei}\t{typeii}\n")
+        print(f"{cds}\t{start}\t{end}\t{typei}\t{typeii}\t{conclusion}")
         os.remove(f'./prodigal_result/{record.id}.fasta')
 
 
