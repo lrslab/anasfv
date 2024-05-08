@@ -1,7 +1,7 @@
 
 The **anasfv** project focuses on analyzing nanopore-sequenced data of PCR-amplified African Swine Fever Virus (ASFV). 
 
-The workflow consists of two parts:
+The workflow consists of 4 parts:
 
 Part 1: Using nanopore-sequenced data of PCR-amplified ASFV to assemble a genome.
 
