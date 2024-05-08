@@ -3,11 +3,13 @@ The **anasfv** project focuses on analyzing nanopore-sequenced data of PCR-ampli
 
 The workflow consists of two parts:
 
-Part 1:
-Using nanopore-sequenced data of PCR-amplified ASFV to assemble a genome.
+Part 1: Using nanopore-sequenced data of PCR-amplified ASFV to assemble a genome.
 
-Part 2:
-Analyzing the completeness of the assembled ASFV genome, checking for any evidence of recombination between genotypes I and II, and constructing a phylogenetic tree.
+Part 2: Analyzing the completeness of the assembled ASFV genome.
+
+Part 3: Checking for any evidence of recombination between genotypes I and II.
+
+Part 4: Constructing a phylogenetic tree.
 
 ## Requirements:
 
@@ -31,16 +33,8 @@ Install requirements:
 ```
 pip install biopython
 pip install pandas
-conda install -c bioconda medaka
-conda install -c bioconda samtools
-conda install -c bioconda bedtools
-conda install -c bioconda minimap2
-conda install -c bioconda nanofilt 
+conda install -c bioconda medaka samtools bedtools minimap2 nanofilt prodigal exonerate blast muscle
 conda install -c conda-forge -c bioconda homopolish=0.4.1=pyhdfd78af_1
-conda install -c bioconda prodigal
-conda install -c bioconda exonerate
-conda install -c bioconda blast
-conda install -c bioconda muscle
 ```
 ## Workflow Example:
 Get the number of available processors.
@@ -88,26 +82,29 @@ homopolish polish -a ./all-assembly_medaka_result/consensus.fasta -l ./near.fast
 cp ./homopolish_output/consensus_homopolished.fasta ./single_fasta/strain_name.fasta
 #Change sequence ID
 sed -i '1s/.*/>strain_name/' ./single_fasta/strain_name.fasta
-``` 
-### Part 2 (Analyzing genomes and constructing a tree):
+```
+### Part 2 (Genome completeness evaluation):
+We only established consensus gene sets for genotype I and genotype II. Using -c to assign consensus gene sets.
+Using OQ504956.1 as example：
+```
+./completeness.py ./single_fasta/OQ504956.1.fasta -c II > OQ504956.1_completeness.tsv
+```
+### Part 3 (Recombination test):
+Using OQ504956.1 as example：
+```
+./recombination_test.py ./single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
+```
+### Part 4 (Constructing a tree):
 1. Download all ASFV genomes from NCBI to the "./single_fasta" directory (If it has already been downloaded in Part 1, please ignore this step).
 ```
 ./download_asfv_genome.py
 ```
-2. Genome completeness evaluation (OQ504956.1 as example).
-```
-./completeness.py ./single_fasta/OQ504956.1.fasta -c II > OQ504956.1_completeness.tsv
-```
-3. recombination test (OQ504956.1 as example).
-```
-./recombination_test.py ./single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
-```
-5. Get aligenments for uDance.
+2. Get aligenments for uDance.
 ( find cds in all genome files from "./single_fasta" and get a "./aligenments" directory as input for uDance )
 ```
 ./get_cds_alignments.py
 ```
-6. Build a tree using uDance.
+3. Build a tree using uDance.
 
 Perform a tree construction in de-novo mode and an iterative tree construction in tree mode.
 Refer to [uDance](https://github.com/balabanmetin/uDance)
