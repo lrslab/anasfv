@@ -15,8 +15,6 @@ Part 4: Constructing a phylogenetic tree.
 
 1. python: 3.11 (tested). Most Python 3 versions should work.
 2. Software versions tested:
-	 \- Biopython: 1.8.1
-	 \- Pandas: 2.0.3
 	 \- Medaka: 1.11.3
  	 \- Samtools: 1.17
   	 \- BEDTools: 2.26.0
@@ -33,8 +31,13 @@ Install requirements:
 ```
 conda install -c bioconda medaka samtools bedtools minimap2 nanofilt prodigal exonerate blast muscle
 conda install -c conda-forge -c bioconda homopolish=0.4.1=pyhdfd78af_1
+```
+
+Install ANASFV:
+```
 pip install anasfv
 ```
+
 ## Workflow Example:
 Get the number of available processors.
 ```
