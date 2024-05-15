@@ -80,12 +80,12 @@ sed -i '1s/.*/>strain_name/' ./single_fasta/strain_name.fasta
 ```
 ### Part 2 (Genome completeness evaluation):
 We only established consensus gene sets for genotype I and genotype II. Using -c to assign consensus gene sets.
-Using OQ504956.1 as exampleï¼š
+Using OQ504956.1 as example£º
 ```
 completeness.py ./single_fasta/OQ504956.1.fasta -c II > OQ504956.1_completeness.tsv
 ```
 ### Part 3 (Recombination test):
-Using OQ504956.1 as exampleï¼š
+Using OQ504956.1 as example£º
 ```
 recombination_test.py ./single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
 ```
