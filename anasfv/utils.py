@@ -16,7 +16,7 @@ import gzip
 from Bio import SeqIO
 
 #### logger init
-import logger
+from anasfv import logger
 LOGGER=logger.get_logger()
 ####
 

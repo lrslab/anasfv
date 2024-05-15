@@ -4,10 +4,10 @@ from Bio import SeqIO
 import os
 import subprocess
 import pandas as pd
+import pkgutil
 
 
-
-def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
+def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):       
     consensusfile = f'./consensus_ffn/type{consensus_use}_consensus'
     df_querys = pd.DataFrame(
         columns=['name', 'Subject_id', 'identity', 'alignment_length', 'mismatches', 'gap_openings', 'q.start', 'q.end',
@@ -59,9 +59,14 @@ def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
     return busco
 
 def run_blast(strain, consensus_use):
+
     file = f'./prodigal_result/{strain}.fna'
     prodigal_file = list(SeqIO.parse(file, "fasta"))
     consensusfile = f'./consensus_ffn/type{consensus_use}_consensus'
+    
+    file = f'./prodigal_result/{strain}.fna'
+    prodigal_file = list(SeqIO.parse(file, "fasta"))
+    
     try:
         os.makedirs(f'type{consensus_use}_blast')
     except FileExistsError:
@@ -81,14 +86,20 @@ if __name__ =='__main__':
     input_path = args.input
     consensus_use = args.c
     single_fasta=os.path.basename(input_path)
-    
 
     os.system('rm -rf prodigal_result')
     os.makedirs('prodigal_result')
     
+    
     prodigal_cmd = f'prodigal -i {input_path} -o ./prodigal_result/{single_fasta}.gff -f gff -a ./prodigal_result/{single_fasta}.faa -d ./prodigal_result/{single_fasta}.fna'
     os.system(prodigal_cmd)
 
+    if not os.path.exists('consensus_ffn'):
+        os.mkdir('consensus_ffn')
+    for suffix in ['ffn','ndb','nhr','nin','not','nsq','ntf','nto']:
+        data = pkgutil.get_data('anasfv', f'consensus_ffn/type{consensus_use}_consensus.{suffix}')
+        with open(f'consensus_ffn/type{consensus_use}_consensus.{suffix}', 'wb') as f:
+            f.write(data)
     
     run_blast(single_fasta,consensus_use)
 

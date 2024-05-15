@@ -18,6 +18,7 @@ from collections import OrderedDict
 import os
 import pandas as pd
 import Bio.SeqIO
+import pkgutil
 
 
 
@@ -187,11 +188,32 @@ def get_unaligned_cds(all_cds,output_dir):
 
 
 if __name__=="__main__":
-    cds_file="./ref_cds/asfv_cds.fa"
+    import argparse
     
-    single_fasta_list=[i for i in os.listdir("./single_fasta") if i.endswith('.fasta')]
+    if not os.path.exists('ref_cds'):
+        os.mkdir('ref_cds')
+    data = pkgutil.get_data('anasfv', f'ref_cds/asfv_cds.fa')
+    with open(f'ref_cds/asfv_cds.fa', 'wb') as f:
+        f.write(data)
+    cds_file = 'ref_cds/asfv_cds.fa'
+    
+    example_text = '''example:
+        get_cds_alignments.py -f ./single_fasta
+        '''
+
+    parser = argparse.ArgumentParser(prog='get_cds_alignments.py',
+                                     description='Run bash cmd lines for files',
+                                     epilog=example_text,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+
+    
+    parser.add_argument("-f", "--file", help="dir of the fasta files")
+    parser.add_argument("-c", "--core", help="the core", default= 32)
+    args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
+    
+    single_fasta_list=[i for i in os.listdir(args.file) if i.endswith('.fasta')]
     for single_fasta in single_fasta_list:
-        flow_exon(cds_file, "./single_fasta/"+single_fasta, geneticcode=11, prefix=single_fasta[:-6])
+        flow_exon(cds_file, f"./{args.file}/"+single_fasta, geneticcode=11, prefix=single_fasta[:-6])
 
     os.system("rm single_process -rf")
     os.makedirs("single_process")
@@ -207,4 +229,4 @@ if __name__=="__main__":
     
     
     for file in os.listdir('./unaligned_cds'):
-        os.system(f'muscle -super5 ./unaligned_cds/{file} -output ./alignments/{file} -nt')
+        os.system(f'muscle -super5 ./unaligned_cds/{file} -output ./alignments/{file} -nt -threads {args.core}')

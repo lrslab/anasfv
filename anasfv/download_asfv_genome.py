@@ -87,4 +87,3 @@ if __name__ == "__main__":
 
     # Even without performing duplicate removal in this step, uDance will only keep one instance of identical sequences when constructing the tree.
     # I want to keep the sequence with an accession ID starting with "NC", so I have removed duplicate sequences here.
-    # Additionally, there will still be some nearly identical sequences that will be merged during the tree construction process of uDance.

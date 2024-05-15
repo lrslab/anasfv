@@ -3,6 +3,7 @@
 # @Time    : 3/2/2021 5:32 PM
 # @Author  : Runsheng
 # @File    : get_near_ref.py
+
 """
 from multiple references, get the nearest reference for further polish
 mostly used for RNA virus reference choosing
@@ -11,10 +12,11 @@ mostly used for RNA virus reference choosing
 from __future__ import print_function
 import logging
 import operator
-from utils import myexe, fasta2dic, chr_select
+import os
+from anasfv.utils import myexe, fasta2dic, chr_select
 
 # logger
-from logger import init_logger, get_logger
+from anasfv.logger import init_logger, get_logger
 LOGGER=get_logger()
 
 
@@ -88,8 +90,7 @@ if __name__=="__main__":
     import argparse
 
     example_text = '''example:
-        ### example to run the bedtools intersection for all bed files with the nr3c1exon.gtf file
-        get_near_ref.py -r ref.fasta -f read.fastq > near1.fasta 
+        find_near_ref.py -r ./single_fasta -f read.fastq > near.fasta 
         '''
 
     parser = argparse.ArgumentParser(prog='get_near_ref.py',
@@ -98,16 +99,17 @@ if __name__=="__main__":
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
 
     parser.add_argument("-f", "--file", help="the fastq file")
-    parser.add_argument("-r", "--reference", help="the reference file")
+    parser.add_argument("-r", "--reference", help="dir of the reference files")
     parser.add_argument("-c", "--core", help="the core", default= 32)
     parser.add_argument("-q", "--qscore", help="the qscore used to filter the bam file", default= 0)
     parser.add_argument("-m", "--mapper", help="the mapper used to map, can be minimap2 or bwa", default="minimap2")
 
     args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
 
-    ref_bed=wrapper_run_get_bedfile(args.reference, args.file, args.core, args.qscore, args.mapper)
+    os.system(f'cat {args.reference}/*.fasta > allde.fasta')
+    ref_bed=wrapper_run_get_bedfile('allde.fasta', args.file, args.core, args.qscore, args.mapper)
     chrname=bed_parser_get_higest_coverage(ref_bed)
-    fa_dic=fasta2dic(args.reference)
+    fa_dic=fasta2dic('allde.fasta')
     # name, seq=chr_select(fa_dic, chrname)
     seq = str(fa_dic[chrname].seq)
     print(">{name}\n{seq}\n".format(name=chrname, seq=seq))

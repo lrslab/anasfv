@@ -5,6 +5,7 @@ import os
 import subprocess
 import pandas as pd
 from completeness import run_blast
+import pkgutil
 
 
 def like_I_or_II(single_fasta,prodigal_file):
@@ -81,4 +82,14 @@ if __name__ =='__main__':
     os.system(prodigal_cmd)
 
     prodigal_file=list(SeqIO.parse(f'./prodigal_result/{single_fasta}.fna', "fasta"))
+    
+    
+    if not os.path.exists('consensus_ffn'):
+        os.mkdir('consensus_ffn')
+    for suffix in ['ffn','ndb','nhr','nin','not','nsq','ntf','nto']:
+        for consensus_use in ['Imore','IImore']:
+            data = pkgutil.get_data('anasfv', f'consensus_ffn/type{consensus_use}_consensus.{suffix}')
+            with open(f'consensus_ffn/type{consensus_use}_consensus.{suffix}', 'wb') as f:
+                f.write(data)
+    
     like_I_or_II(single_fasta,prodigal_file)
