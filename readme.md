@@ -1,6 +1,8 @@
 
 The **anasfv** project focuses on analyzing nanopore-sequenced data of PCR-amplified African Swine Fever Virus (ASFV). 
 
+<a href="https://pypi.python.org/pypi/anasfv" rel="pypi">![PyPI](https://img.shields.io/pypi/v/anasfv?color=green) </a>
+
 The workflow consists of 4 parts:
 
 Part 1: Using nanopore-sequenced data of PCR-amplified ASFV to assemble a genome.
