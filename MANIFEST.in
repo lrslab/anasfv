@@ -1,1 +1,2 @@
-include anasfv/*
+include anasfv/ref_cds/*
+include anasfv/consensus_ffn/*
