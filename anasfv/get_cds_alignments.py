@@ -213,7 +213,7 @@ if __name__=="__main__":
     
     single_fasta_list=[i for i in os.listdir(args.file) if i.endswith('.fasta')]
     for single_fasta in single_fasta_list:
-        flow_exon(cds_file, f"./{args.file}/"+single_fasta, geneticcode=11, prefix=single_fasta[:-6])
+        flow_exon(cds_file, f"{args.file}/"+single_fasta, geneticcode=11, prefix=single_fasta[:-6])
 
     os.system("rm single_process -rf")
     os.makedirs("single_process")
