@@ -25,12 +25,12 @@ if __name__=="__main__":
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     
     
-    parser.add_argument("-p", "--processes", help="number of processes", default= 4))
+    parser.add_argument("-p", "--processes", help="number of processes", default= 4)
     parser.add_argument("-i", "--input", help="input fasta or fastq file")
     parser.add_argument("-r", "--ref", help="a folder containing multiple ASFV genomes, or a single reference sequence file")
-    parser.add_argument("-o", "--output", help="assembled ASFV genome"
-    parser.add_argument("--medaka", help="medaka model")
-    parser.add_argument("--homopolish", help="homopolish model")
+    parser.add_argument("-o", "--output", help="assembled ASFV genome")
+    parser.add_argument("--medaka", help="medaka model",default=None)
+    parser.add_argument("--homopolish", help="homopolish model",default=None)
 
     args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
     num_processes = args.processes
@@ -41,7 +41,7 @@ if __name__=="__main__":
     homopolish_model = args.homopolish
     
     if os.path.isdir(ref):
-        subprocess.run(f'find_near_ref.py -r {ref} -f {input_reads} > near.fasta', shell=True)
+        subprocess.run(f'find_near_ref.py -r {ref} -f {input_reads} -c {num_processes}> near.fasta', shell=True)
         ref = 'near.fasta'
     elif os.path.isfile(ref):
         pass
@@ -59,17 +59,13 @@ if __name__=="__main__":
     subprocess.run(f"sed -i '1s/.*/>{strain}/' {output}", shell=True)
 
     if medaka_model:
-        command = f'medaka_consensus -i {input_reads} -d {output} -o medaka_result -m {medaka_model} -t ${num_processes} > medaka.log'
+        command = f'medaka_consensus -i {input_reads} -d {output} -o medaka_result -m {medaka_model} -t {num_processes} > medaka.log'
         conda_env = 'medaka'
         execute_command_in_conda_env(conda_env, command)
-        subprocess.run(f'cp ./medaka_result/consensus.fasta {output}, shell=True')
+        subprocess.run(f'cp ./medaka_result/consensus.fasta {output}', shell=True)
 
     if homopolish_model:
-        if medaka_model:
-            consensus = './medaka_result/consensus.fasta'
-        else:
-            consensus = 'output'
-            command = f'homopolish polish -a {consensus} -l {ref} -m {homopolish_model} -o homopolish-output'
-            conda_env = 'homopolish'
-            execute_command_in_conda_env(conda_env, command)
-            subprocess.run(f'cp ./homopolish_output/consensus_homopolished.fasta {output}, shell=True')
+        command = f'homopolish polish -a {output} -l {ref} -m {homopolish_model} -o homopolish-output'
+        conda_env = 'homopolish'
+        execute_command_in_conda_env(conda_env, command)
+        subprocess.run(f'cp ./homopolish-output/{strain}_homopolished.fasta {output}', shell=True)
