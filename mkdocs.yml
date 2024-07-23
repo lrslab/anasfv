@@ -1,0 +1,8 @@
+site_name: ANASFV
+nav:
+  - Installation: installation.md
+  - Usage: man.md
+  - Description of output : statistics.md
+  - Example: example.md
+  - Contacts: contact.md
+theme: readthedocs
