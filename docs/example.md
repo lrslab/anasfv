@@ -1,6 +1,6 @@
 # Example Projects
 ## Prepare your data
-1. ONT reads (fasta or fastq file) ，可以通过下面的命令下载我们的测试文件
+1. ONT reads (fasta or fastq file). You can download our test file using the following command.
 ```
 wget https://raw.githubusercontent.com/lrslab/anasfv/main/test_data.fasta
 ```
