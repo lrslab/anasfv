@@ -6,7 +6,7 @@ wget https://raw.githubusercontent.com/lrslab/anasfv/main/test_data.fasta
 ```
 2. Other ASFV genomes. These genomes are used for mapping assembly and tree building. You can directly use the single_fasta directory in this project, which contains 312 downloaded ASFV genomes, or you can run download_asfv_genome.py, which will create a single_fasta directory in the working directory and download all the latest ASFV genomes on NCBI to the single_fasta directory.
 ```
-git clone -b single_fasta https://github.com/lrslab/anasfv.git
+git clone https://github.com/nimua/single_fasta.git
 ```
 3. Using docker. It may not be easy to successfully install all the dependent software. So we provide a docker image:
 ```
