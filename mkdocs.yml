@@ -1,8 +1,27 @@
 site_name: ANASFV
+
 nav:
+  - Home: index.md
   - Installation: installation.md
-  - Usage: man.md
-  - Description of output : statistics.md
-  - Example: example.md
-  - Contacts: contact.md
-theme: readthedocs
+  - Example Projects : example.md
+  - Mapping Assembly: assembly.md
+  - Genome Completeness Evaluation: completeness.md
+  - Recombination Test : recombination.md
+  - Constructing a Tree : tree.md
+
+
+theme:
+  name: readthedocs
+  highlightjs: true
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        # See: https://mkdocstrings.github.io/python/usage/
+        python:
+          options:
+            docstring_style: sphinx
+markdown_extensions:
+  - markdown_include.include:
+      base_path: .
+  - admonition
