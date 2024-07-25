@@ -1,7 +1,9 @@
 # Installation
 
 Requirements：
+
 1. python: 3.11 (tested). Most Python 3 versions should work.
+   
 2. Software versions tested:
  	  \- Samtools: 1.17
   	 \- BEDTools: 2.26.0
