@@ -20,32 +20,39 @@ Full documentation is available at [read the docs](https://anasfv.readthedocs.io
 Requirements：
 1. python: 3.11 (tested). Most Python 3 versions should work.
 2. Software versions tested:
-	 \- Medaka: 1.11.3
  	 \- Samtools: 1.17
   	 \- BEDTools: 2.26.0
   	 \- Minimap2: 2.17-r941
-  	 \- NanoFilt: 2.8.0
-  	 \- Homopolish: 0.4.1
   	 \- Prodigal: 2.6.3
   	 \- Exonerate: 2.4.0
   	 \- blast: 2.12.0
   	 \- MUSCLE: 5.1
-
-  	 
+   	 \- Medaka: 1.11.3
+  	 \- Homopolish: 0.4.1
+  	 \- uDance: 1.6.5
  
-Install requirements:
+Install requirements in conda environment and install ANASFV via PyPI:
 ```
-conda install -c bioconda medaka samtools bedtools minimap2 nanofilt prodigal exonerate blast muscle
-conda install -c conda-forge -c bioconda homopolish=0.4.1=pyhdfd78af_1
-```
-Install ANASFV by PyPI:
-```
+conda create -n anasfv -c conda-forge python=3.11 -y
+conda activate anasfv
+conda install -c bioconda samtools bedtools minimap2 prodigal exonerate blast muscle -y
 pip install anasfv
 ```
 
-It may not be easy to successfully install all the dependent software. So we provide a docker installation:
+If you need to use medaka and homopolish for polish, you need to create their corresponding conda environments and install them, because there will be some conflicts if you install them directly in the ANASFV runtime environment.
 ```
-docker.....
+conda create -n medaka -c bioconda -c conda-forge medaka -y
+conda config --set channel_priority flexible
+conda create -n homopolish -c conda-forge -c bioconda -c defaults more-itertools=8.4.0 homopolish=0.4.1 -y
+```
+
+For uDance installation refer to [uDance](https://github.com/balabanmetin/uDance)
+
+
+If you find the installation too troublesome, we provide a docker image:
+```
+docker pull xxxx
+docker container run -it xxx /bin/bash
 ```
 
 ## A Quick Example:
