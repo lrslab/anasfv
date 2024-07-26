@@ -61,7 +61,7 @@ docker container run -it xxx /bin/bash
 ```
 wget https://raw.githubusercontent.com/lrslab/anasfv/main/test_data.fasta
 ```
-2. Other ASFV genomes. These genomes are used for mapping assembly and tree building. You can directly use the [single_fasta](https://github.com/nimua/single_fasta.git), which contains 312 downloaded ASFV genomes, or you can run download_asfv_genome.py, which will create a single_fasta directory in the working directory and download all the latest ASFV genomes on NCBI to the single_fasta directory.
+2. Other ASFV genomes. These genomes are used for mapping assembly and tree building. You can directly use the [single_fasta](https://github.com/nimua/single_fasta.git), which contains 312 downloaded ASFV genomes, or you can run download_asfv_genome.py, which will create a directory name "single_fasta" and download all the latest ASFV genomes on NCBI to the directory.
 ```
 download_asfv_genome.py
 ```
