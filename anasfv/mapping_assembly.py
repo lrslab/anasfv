@@ -69,5 +69,18 @@ if __name__=="__main__":
         conda_env = 'homopolish'
         execute_command_in_conda_env(conda_env, command)
         subprocess.run(f'cp ./homopolish-output/{strain}_homopolished.fasta {output}', shell=True)
-    rm_command=f'rm allde.bed allde.fasta {output}.fai {output}.map-ont.mmi maps.bam maps.bam.bai medaka.log'
+    rm_command=f'rm  maps.bam maps.bam.bai medaka.log'
     subprocess.run(rm_command, shell=True)
+
+
+    file_names = ["allde.bed", "allde.fasta", f"{output}.fai", f"{output}.map-ont.mmi", "maps.bam", "maps.bam.bai", "medaka.log"]
+    current_dir = os.getcwd()
+    for file_name in file_names:
+        file_path = os.path.join(current_dir, file_name)
+        try:
+            os.remove(file_path)
+        except Exception as e:
+            print(f"An error occurred while deleting {file_name}: {e}")
+    
+    
+    
