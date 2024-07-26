@@ -57,7 +57,7 @@ docker container run -it xxx /bin/bash
 
 ## A Quick Example:
 ### Prepare data：
-1. Test data: One line of command downloads test_data.fasta to the working directory
+1. Test data: Downloads test_data.fasta to the working directory
 ```
 wget https://raw.githubusercontent.com/lrslab/anasfv/main/test_data.fasta
 ```
