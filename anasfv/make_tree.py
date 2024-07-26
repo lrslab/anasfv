@@ -88,3 +88,6 @@ if __name__=="__main__":
     
     subprocess.run(f'mv {output_folder}/output {output_folder}/udance_output', shell=True)
     subprocess.run(f'cp {output_folder}/udance_output/udance.maxqs.nwk {output_folder}/tree.nwk', shell=True)
+    
+    rm_command='rm -rf all_cds.fa ref_cds single_process udance.log'
+    subprocess.run(rm_command, shell=True)
