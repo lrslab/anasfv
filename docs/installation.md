@@ -3,8 +3,8 @@
 ## Docker
 It may not be easy to successfully install all the dependent software. So we provide a docker image:
 ```
-docker pull xxxx
-docker container run -it xxx /bin/bash
+docker pull osvolo/anasfv:latest
+docker container run -it osvolo/anasfv /bin/bash
 ```	 
 ## Install requirements in conda environment and install ANASFV via PyPI
 Requirements:
