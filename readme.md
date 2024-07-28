@@ -19,7 +19,7 @@ Full documentation is available at [read the docs](https://anasfv.readthedocs.io
 We provide a docker image. In case you find the installation too troublesome:
 ```
 docker pull osvolo/anasfv:latest
-docker container run -it anasfv /bin/bash
+docker container run -it osvolo/anasfv /bin/bash
 ```
 ## Installation:
 Requirements：
