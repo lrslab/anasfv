@@ -5,9 +5,9 @@ It may not be easy to successfully install all the dependent software. So we pro
 ```
 docker pull xxxx
 docker container run -it xxx /bin/bash
-```
-
-## Requirements
+```	 
+## Install requirements in conda environment and install ANASFV via PyPI
+Requirements:
 
 1. python: 3.11 (tested). Most Python 3 versions should work.
    
@@ -22,10 +22,6 @@ docker container run -it xxx /bin/bash
     \- Medaka: 1.11.3
     \- Homopolish: 0.4.1	
   	 \- uDance: 1.6.5
-
-  	 
-
-## Install requirements in conda environment and install ANASFV via PyPI
 ```
 conda create -n anasfv -c conda-forge python=3.11 -y
 conda activate anasfv
