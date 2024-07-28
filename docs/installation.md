@@ -1,6 +1,13 @@
 # Installation
 
-Requirements：
+## Docker
+It may not be easy to successfully install all the dependent software. So we provide a docker image:
+```
+docker pull xxxx
+docker container run -it xxx /bin/bash
+```
+
+## Requirements
 
 1. python: 3.11 (tested). Most Python 3 versions should work.
    
@@ -18,7 +25,7 @@ Requirements：
 
   	 
 
-Install requirements in conda environment and install ANASFV via PyPI:
+## Install requirements in conda environment and install ANASFV via PyPI
 ```
 conda create -n anasfv -c conda-forge python=3.11 -y
 conda activate anasfv
@@ -34,10 +41,3 @@ conda create -n homopolish -c conda-forge -c bioconda -c defaults more-itertools
 ```
 
 For uDance installation refer to [uDance](https://github.com/balabanmetin/uDance)
-
-
-If you find the installation too troublesome, we provide a docker image:
-```
-docker pull xxxx
-docker container run -it xxx /bin/bash
-```
