@@ -103,7 +103,7 @@ if __name__ =='__main__':
     
     run_blast(single_fasta,consensus_use)
 
-    print('accession_ID\tsize\tprodigal_gene_num\twith_MGF\twithout_MGF')
+    print('file_name\tsize\tprodigal_gene_num\twith_MGF\twithout_MGF')
 
     file = f'./prodigal_result/{single_fasta}.fna'
     prodigal_file = list(SeqIO.parse(file, "fasta"))
