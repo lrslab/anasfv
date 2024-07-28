@@ -51,7 +51,7 @@ conda config --set channel_priority flexible
 conda create -n homopolish -c conda-forge -c bioconda -c defaults more-itertools=8.4.0 homopolish=0.4.1 -y
 ```
 
-For uDance installation refer to [uDance](https://github.com/balabanmetin/uDance)
+The tree building process uses uDance. For uDance installation refer to [uDance](https://github.com/balabanmetin/uDance)
 
 ## A Quick Example:
 ### Prepare data：
