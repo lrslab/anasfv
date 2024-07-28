@@ -7,9 +7,9 @@ We provide [make_tree.py](#make_treepy) for a one step tree generation process. 
 | Argument name	  | Required | Description |
 | --------------  | ----- | -------- |
 | -p, --processes |  No  | number of processes (default = 4)   |
-| -f,	--file   |  Yes  | dir of the ASFV genome fasta files |
-| -o, --output   |  Yes  | name of output dir  |
-| --udance     |  Yes  | path to udance dir  |
+| -f,	--file   |  Yes  | a directory of multiple ASFV genome fasta files as input |
+| -o, --output   |  Yes  | name of output directory  |
+| --udance     |  Yes  | path to udance directory  |
 
 ### Example
 ```
@@ -24,7 +24,7 @@ Get the CDS for each ASFV isolate and perform multiple sequence alignment. The o
 ### Arguments
 | Argument name	  | Required | Description |
 | --------------  | ----- | -------- |
-| -f,	--file   |  Yes  | dir of the ASFV genome fasta files |
+| -f,	--file   |  Yes  | a directory of multiple ASFV genome fasta files as input |
 | -c, --core |  No  | number of processes (default = 32)   |
 
 ### Example
