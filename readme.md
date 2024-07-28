@@ -15,8 +15,13 @@ Full documentation is available at [read the docs](https://anasfv.readthedocs.io
 <a href="https://pypi.python.org/pypi/anasfv" rel="pypi">![PyPI](https://img.shields.io/pypi/v/anasfv?color=green) </a>
 
 
+## Docker:
+We provide a docker image. In case you find the installation too troublesome:
+```
+docker pull xxxx
+docker container run -it xxx /bin/bash
+```
 ## Installation:
-
 Requirements：
 1. python: 3.11 (tested). Most Python 3 versions should work.
 2. Software versions tested:
@@ -48,18 +53,11 @@ conda create -n homopolish -c conda-forge -c bioconda -c defaults more-itertools
 
 For uDance installation refer to [uDance](https://github.com/balabanmetin/uDance)
 
-
-If you find the installation too troublesome, we provide a docker image:
-```
-docker pull xxxx
-docker container run -it xxx /bin/bash
-```
-
 ## A Quick Example:
 ### Prepare data：
 1. Test data: Downloads test_data.fasta to the working directory
 ```
-wget https://raw.githubusercontent.com/lrslab/anasfv/main/test_data.fasta
+wget https://github.com/lrslab/anasfv/releases/download/test_data.fasta/test_data.fasta
 ```
 2. Other ASFV genomes. These genomes are used for mapping assembly and tree building. You can directly use the [single_fasta](https://github.com/nimua/single_fasta.git), which contains 312 downloaded ASFV genomes, or you can run download_asfv_genome.py, which will create a directory name "single_fasta" and download all the latest ASFV genomes on NCBI to the directory.
 ```
