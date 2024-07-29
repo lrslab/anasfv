@@ -1,4 +1,10 @@
 # Example Projects
+## Docker
+It may not be easy to successfully install all the dependent software. So we provide a docker image:
+```
+docker pull osvolo/anasfv:latest
+docker container run -it osvolo/anasfv /bin/bash
+```	 
 ## Prepare your data
 The test files are already included in the docker container. If you don't use Docker, you can get it by the following method.
 1. ONT reads (fasta or fastq file). You can download our test file using the following command.
