@@ -8,12 +8,12 @@ docker container run -it osvolo/anasfv /bin/bash
 ## Prepare your data
 The test files are already included in the docker container. If you don't use Docker, you can get it by the following method.
 
-1. ONT reads (fasta or fastq file). You can download our test file using the following command.
+① ONT reads (fasta or fastq file). You can download our test file using the following command.
 ```
 wget https://github.com/lrslab/anasfv/releases/download/test_data.fasta/test_data.fasta
 ```
 
-2. Other ASFV genomes. These genomes are used for mapping assembly and tree building. You can directly use the single_fasta directory in this project, which contains 312 downloaded ASFV genomes.
+② Other ASFV genomes. These genomes are used for mapping assembly and tree building. You can directly use the single_fasta directory in this project, which contains 312 downloaded ASFV genomes.
 ```
 git clone https://github.com/nimua/single_fasta.git
 ```
