@@ -7,6 +7,7 @@ docker container run -it osvolo/anasfv /bin/bash
 ```	 
 ## Prepare your data
 The test files are already included in the docker container. If you don't use Docker, you can get it by the following method.
+
 1. ONT reads (fasta or fastq file). You can download our test file using the following command.
 ```
 wget https://github.com/lrslab/anasfv/releases/download/test_data.fasta/test_data.fasta
