@@ -31,6 +31,7 @@ download_asfv_genome.py
 ### Output
 A directory "single_fasta" containing all ASFV genomes from NCBI in the current working directory.
 
+------------------------------------
 ## find_near_ref.py
 ### Description
 From multiple references, get the nearest reference. This task has been integrated into mapping_assembly.py. If you want to use this task separately, you can use this script.
