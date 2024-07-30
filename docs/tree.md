@@ -12,7 +12,7 @@ We provide [make_tree.py](#make_treepy) for a one step tree generation process. 
 | --udance     |  Yes  | path to udance directory  |
 
 ### Example
-```
+```bash
 make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance
 ```
 ### Output
@@ -28,7 +28,7 @@ Get the CDS for each ASFV isolate and perform multiple sequence alignment. The o
 | -c, --core |  No  | number of processes (default = 32)   |
 
 ### Example
-```
+```bash
 get_cds_alignments.py -f single_fasta
 ```
 ### Output
