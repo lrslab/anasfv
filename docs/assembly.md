@@ -14,7 +14,7 @@ The task requires the ONT reads and a reference sequence. If a reference sequenc
 | --homopolish   |  No  | homopolish model  |
 
 ### Example
-```
+```bash
 mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o asfv_genome.fasta --medaka r941_min_high_g303 --homopolish R9.4.pkl
 ```
 ### Output
@@ -24,7 +24,7 @@ A fasta file of the assembled ASFV genome.
 ### Description
 Download all ASFV sequences with a length ranging from 160,000 to 250,000 from NCBI.
 ### Example
-```
+```bash
 download_asfv_genome.py
 ```
 ### Output
@@ -43,7 +43,7 @@ From multiple references, get the nearest reference. This task has been integrat
 | -m, --mapper |  No  |  the mapper used to map, can be minimap2 or bwa (default="minimap2") |
 
 ### Example
-```
+```bash
 find_near_ref.py -r ./single_fasta -f read.fastq > near.fasta 
 ```
 ### Output
