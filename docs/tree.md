@@ -18,6 +18,7 @@ make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance
 ### Output
 The final tree file is a Newick file named 'tree.nwk', located in the output dir specified by the -o parameter.
 
+------------------------------------
 ## get_cds_alignments.py
 ### Description
 Get the CDS for each ASFV isolate and perform multiple sequence alignment. The output obtained can be directly used as input for tree building (this task is already included in make_tree.py).
