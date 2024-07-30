@@ -11,7 +11,7 @@ An ASFV genome file.
 | -c |  No  | consensus sequences to be use: I or II (default='II')  |
 
 ### Example
-```
+```bash
 completeness.py single_fasta/OM966717.1.fasta -c II > OM966717.1_completeness.tsv
 ```
 ### Output
