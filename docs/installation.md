@@ -2,7 +2,7 @@
 
 ## Docker
 It may not be easy to successfully install all the dependent software. So we provide a docker image:
-```
+```bash
 docker pull osvolo/anasfv:latest
 docker container run -it osvolo/anasfv /bin/bash
 ```	 
@@ -22,7 +22,7 @@ Requirements:
     \- Medaka: 1.11.3
     \- Homopolish: 0.4.1	
   	 \- uDance: 1.6.5
-```
+```bash
 conda create -n anasfv -c conda-forge python=3.11 -y
 conda activate anasfv
 conda install -c bioconda samtools bedtools minimap2 prodigal exonerate blast muscle -y
@@ -30,7 +30,7 @@ pip install anasfv
 ```
 
 If you need to use medaka and homopolish for polish, you need to create their corresponding conda environments and install them, because there will be some conflicts if you install them directly in the ANASFV runtime environment.
-```
+```bash
 conda create -n medaka -c bioconda -c conda-forge medaka -y
 conda config --set channel_priority flexible
 conda create -n homopolish -c conda-forge -c bioconda -c defaults more-itertools=8.4.0 homopolish=0.4.1 -y
