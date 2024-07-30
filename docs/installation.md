@@ -1,7 +1,7 @@
 # Installation
 
 ## Docker
-It may not be easy to successfully install all the dependent software. So we provide a docker image:
+Using Docker is more convenient, eliminating the troublesome of installation steps. So we provide a docker image:
 ```bash
 docker pull osvolo/anasfv:latest
 docker container run -it osvolo/anasfv /bin/bash
