@@ -6,7 +6,7 @@ We generated consensus CDS sequences from genotype I and II isolates. The CDS pr
 ### Input
 An ASFV genome file to be tested.
 ### Example
-```
+```bash
 recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
 ```
 ### Output
