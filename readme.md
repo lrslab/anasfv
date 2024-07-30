@@ -16,7 +16,7 @@ Full documentation is available at [read the docs](https://anasfv.readthedocs.io
 
 
 ## Docker:
-We provide a docker image. In case you find the installation too troublesome:
+Using Docker is more convenient, eliminating the troublesome of installation steps.
 ```
 docker pull osvolo/anasfv:latest
 docker container run -it osvolo/anasfv /bin/bash
