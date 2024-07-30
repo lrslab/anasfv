@@ -20,6 +20,7 @@ mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o asfv_genome.fasta
 ### Output
 A fasta file of the assembled ASFV genome.
 
+------------------------------------
 ## download_asfv_genome.py
 ### Description
 Download all ASFV sequences with a length ranging from 160,000 to 250,000 from NCBI.
