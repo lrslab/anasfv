@@ -41,7 +41,7 @@ if __name__=="__main__":
     homopolish_model = args.homopolish
     
     if os.path.isdir(ref):
-        subprocess.run(f'find_near_ref.py -r {ref} -f {input_reads} -c {num_processes}> near.fasta', shell=True)
+        subprocess.run(f'find_near_ref.py -r {ref} -f {input_reads} -c {num_processes} > near.fasta', shell=True)
         ref = 'near.fasta'
     elif os.path.isfile(ref):
         pass
