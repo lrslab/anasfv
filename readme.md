@@ -82,7 +82,7 @@ recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_t
 ### Task 4 (Constructing a tree):
 Building the tree with the following command. It will use all genome files from "./single_fasta" and get a tree in Newick format.
 ```
-make_tree.py -f single_fasta -o tree
+make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance
 ```
 
 
