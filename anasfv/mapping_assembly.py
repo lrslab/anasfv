@@ -43,6 +43,7 @@ if __name__=="__main__":
     if os.path.isdir(ref):
         subprocess.run(f'find_near_ref.py -r {ref} -f {input_reads} -c {num_processes} > near.fasta', shell=True)
         ref = 'near.fasta'
+        subprocess.run('rm allde.bed allde.fasta maps.bam maps.bam.bai', shell=True)
     elif os.path.isfile(ref):
         pass
     else:
@@ -63,15 +64,14 @@ if __name__=="__main__":
         conda_env = 'medaka'
         execute_command_in_conda_env(conda_env, command)
         subprocess.run(f'cp ./medaka_result/consensus.fasta {output}', shell=True)
+        subprocess.run(f'rm medaka.log {output}.fai {output}.map-ont.mmi', shell=True)
 
     if homopolish_model:
         command = f'homopolish polish -a {output} -l {ref} -m {homopolish_model} -o homopolish-output'
         conda_env = 'homopolish'
         execute_command_in_conda_env(conda_env, command)
         subprocess.run(f'cp ./homopolish-output/{strain}_homopolished.fasta {output}', shell=True)
-        
-    rm_command=f'rm allde.bed allde.fasta {output}.fai {output}.map-ont.mmi maps.bam maps.bam.bai medaka.log'
-    subprocess.run(rm_command, shell=True)
+    
     
     
     
