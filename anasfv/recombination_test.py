@@ -38,8 +38,7 @@ def like_I_or_II(single_fasta,prodigal_file):
             typeii=None
         else:
             typeii=df_query[2][0]
-            if not cds:
-                cds=df_query[1][0]
+            cds=df_query[1][0]
         
         conclusion=None
         if typei and typeii:
