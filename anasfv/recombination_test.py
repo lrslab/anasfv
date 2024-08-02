@@ -16,9 +16,9 @@ def like_I_or_II(single_fasta,prodigal_file):
 
     d_i_seq_len = {}
     d_ii_seq_len = {}
-    for record in SeqIO.parse('./consensus_ffn/typeImore_consensus', "fasta"):
+    for record in SeqIO.parse('./consensus_ffn/typeImore_consensus.ffn', "fasta"):
         d_i_seq_len[record.id]=len(record.seq)
-    for record in SeqIO.parse('./consensus_ffn/typeIImore_consensus', "fasta"):
+    for record in SeqIO.parse('./consensus_ffn/typeIImore_consensus.ffn', "fasta"):
         d_ii_seq_len[record.id]=len(record.seq)
 
 
