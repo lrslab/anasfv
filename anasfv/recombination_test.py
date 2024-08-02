@@ -10,25 +10,18 @@ import pkgutil
 
 
 def like_I_or_II(single_fasta,prodigal_file):
-
+    print("CDS\tStart\tEnd\tGenotypeI\tGenotypeII\tConclusion")
     run_blast(single_fasta,'Imore')
     run_blast(single_fasta,'IImore')
 
     d_i_seq_len = {}
-    d_ii_seq_len = {}
     for record in SeqIO.parse('./consensus_ffn/typeImore_consensus.ffn', "fasta"):
         d_i_seq_len[record.id]=len(record.seq)
+    
+    d_ii_seq_len = {}
     for record in SeqIO.parse('./consensus_ffn/typeIImore_consensus.ffn', "fasta"):
         d_ii_seq_len[record.id]=len(record.seq)
-
-
-    if length is not None:
-        print(f"The length of sequence {sequence_id} is: {length}")
-    else:
-        print(f"Sequence {sequence_id} not found in the FASTA file.")
-
-
-    print("CDS\tStart\tEnd\tGenotypeI\tGenotypeII\tConclusion")
+        
     for record in prodigal_file:
         
         SeqIO.write(record, f"./prodigal_result/{record.id}.fasta", "fasta")
