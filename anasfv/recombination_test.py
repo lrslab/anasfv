@@ -29,7 +29,7 @@ def like_I_or_II(single_fasta,prodigal_file):
         except:
             typei=None
         else:
-            if df_query[3][0]/df_query[3][0]>0.8:
+            if df_query[3][0]/df_query[7][0]>0.8:
                 typei=df_query[2][0]
                 cds=df_query[1][0]
             else:
@@ -40,7 +40,7 @@ def like_I_or_II(single_fasta,prodigal_file):
         except:
             typeii=None
         else:
-            if df_query[3][0] / df_query[3][0] > 0.8:
+            if df_query[3][0] / df_query[7][0] > 0.8:
                 typeii = df_query[2][0]
                 cds = df_query[1][0]
             else:
