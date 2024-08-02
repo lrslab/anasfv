@@ -29,16 +29,22 @@ def like_I_or_II(single_fasta,prodigal_file):
         except:
             typei=None
         else:
-            typei=df_query[2][0]
-            cds=df_query[1][0]
+            if df_query[3][0]/df_query[3][0]>0.8:
+                typei=df_query[2][0]
+                cds=df_query[1][0]
+            else:
+                typei = None
             
         try:
             df_query=pd.read_csv(f'typeIImore_blast/{record.id}.blast',sep='\t', header=None)
         except:
             typeii=None
         else:
-            typeii=df_query[2][0]
-            cds=df_query[1][0]
+            if df_query[3][0] / df_query[3][0] > 0.8:
+                typeii = df_query[2][0]
+                cds = df_query[1][0]
+            else:
+                typeii = None
         
         conclusion=None
         if typei and typeii:
