@@ -8,11 +8,26 @@ from completeness import run_blast
 import pkgutil
 
 
+
 def like_I_or_II(single_fasta,prodigal_file):
 
     run_blast(single_fasta,'Imore')
     run_blast(single_fasta,'IImore')
-    
+
+    d_i_seq_len = {}
+    d_ii_seq_len = {}
+    for record in SeqIO.parse('./consensus_ffn/typeImore_consensus', "fasta"):
+        d_i_seq_len[record.id]=len(record.seq)
+    for record in SeqIO.parse('./consensus_ffn/typeIImore_consensus', "fasta"):
+        d_ii_seq_len[record.id]=len(record.seq)
+
+
+    if length is not None:
+        print(f"The length of sequence {sequence_id} is: {length}")
+    else:
+        print(f"Sequence {sequence_id} not found in the FASTA file.")
+
+
     print("CDS\tStart\tEnd\tGenotypeI\tGenotypeII\tConclusion")
     for record in prodigal_file:
         
@@ -29,7 +44,7 @@ def like_I_or_II(single_fasta,prodigal_file):
         except:
             typei=None
         else:
-            if df_query[3][0]/df_query[7][0]>0.8:
+            if df_query[3][0]/d_i_seq_len[df_query[1][0]]>0.8:
                 typei=df_query[2][0]
                 cds=df_query[1][0]
             else:
@@ -40,7 +55,7 @@ def like_I_or_II(single_fasta,prodigal_file):
         except:
             typeii=None
         else:
-            if df_query[3][0] / df_query[7][0] > 0.8:
+            if df_query[3][0]/d_ii_seq_len[df_query[1][0]]>0.8:
                 typeii = df_query[2][0]
                 cds = df_query[1][0]
             else:
