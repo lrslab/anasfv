@@ -4,7 +4,7 @@ With the emergence of recombinant ASFV of genotype I and genotype II, we use rec
 ### Description
 We generated consensus CDS sequences from genotype I and II isolates. The CDS predicted from input ASFV genome using Prodigal were compared to consensus sequences using BLASTN (e-value 1e-5). Output a table indicating whether each CDS is closer to genotype I or genotype II.
 ### Input
-An ASFV genome file to be tested.
+An ASFV genome file (fasta format).
 ### Example
 ```bash
 recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
