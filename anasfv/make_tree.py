@@ -38,12 +38,14 @@ if __name__=="__main__":
     parser.add_argument("-f", "--file", help="dir of the fasta files")
     parser.add_argument("-o", "--output", help="output dir")
     parser.add_argument("--udance", help="path to udance dir")
+    parser.add_argument("--iteration", help="Perform an iterative tree construction", action="store_true")
 
     args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
     num_processes = args.processes
     input_folder = args.file
     output_folder = args.output
     udance_folder = args.udance
+    
 
     current_path = os.getcwd()
     output_folder = get_abs_path(output_folder, current_path)
@@ -73,21 +75,24 @@ if __name__=="__main__":
 
     command = f'snakemake -c {num_processes} --configfile config1.yaml --snakefile udance.smk all'
     execute_command_in_conda_env('udance', command)
-
-    # round2
-    subprocess.run(f'cp {output_folder}/output/udance.maxqs.nwk {output_folder}/backbone.nwk', shell=True)
-    subprocess.run(f'rm {output_folder}/udance.log', shell=True)
-    subprocess.run(f'rm -rf {output_folder}/output', shell=True)
     
-    
-    data['backbone'] = 'tree'
-    with open('config2.yaml', 'w') as file:
-        yaml.safe_dump(data, file)
-    command = f'snakemake -c {num_processes} --configfile config2.yaml --snakefile udance.smk all'
-    execute_command_in_conda_env('udance', command)
-    
-    subprocess.run(f'mv {output_folder}/output {output_folder}/udance_output', shell=True)
-    subprocess.run(f'cp {output_folder}/udance_output/udance.maxqs.nwk {output_folder}/tree.nwk', shell=True)
-    
+    if args.iteration:
+        # round2
+        subprocess.run(f'cp {output_folder}/output/udance.maxqs.nwk {output_folder}/backbone.nwk', shell=True)
+        subprocess.run(f'rm {output_folder}/udance.log', shell=True)
+        subprocess.run(f'rm -rf {output_folder}/output', shell=True)
+        
+        data['backbone'] = 'tree'
+        with open('config2.yaml', 'w') as file:
+            yaml.safe_dump(data, file)
+        command = f'snakemake -c {num_processes} --configfile config2.yaml --snakefile udance.smk all'
+        execute_command_in_conda_env('udance', command)
+        
+        subprocess.run(f'mv {output_folder}/output {output_folder}/udance_output', shell=True)
+        subprocess.run(f'cp {output_folder}/udance_output/udance.maxqs.nwk {output_folder}/tree.nwk', shell=True)
+    else:
+        subprocess.run(f'mv {output_folder}/output {output_folder}/udance_output', shell=True)
+        subprocess.run(f'cp {output_folder}/output/udance.maxqs.nwk {output_folder}/tree.nwk', shell=True)
+            
     rm_command='rm -rf all_cds.fa ref_cds single_process udance.log'
     subprocess.run(rm_command, shell=True)
