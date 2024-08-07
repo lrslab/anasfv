@@ -78,11 +78,12 @@ completeness.py single_fasta/OQ504956.1.fasta -c II > OQ504956.1_completeness.ts
 Using OQ504956.1 as example：
 ```
 recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
+recombination_plot.py OQ504956.1_recombination_test.tsv
 ```
 ### Task 4 (Constructing a tree):
 Building the tree with the following command. It will use all genome files from "./single_fasta" and get a tree in Newick format.
 ```
-make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance
+make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance --iteration
 ```
 
 
