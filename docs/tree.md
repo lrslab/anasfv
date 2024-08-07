@@ -13,7 +13,7 @@ We provide [make_tree.py](#make_treepy) for a one step tree generation process. 
 
 ### Example
 ```bash
-make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance
+make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance --iteration
 ```
 ### Output
 The final tree file is a Newick file named 'tree.nwk', located in the output dir specified by the -o parameter.
