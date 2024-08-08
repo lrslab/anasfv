@@ -70,6 +70,7 @@ if __name__=="__main__":
         data['backbone'] = 'de-novo'
         data['resources']['cores'] = num_processes
         data['mainlines_config']['n'] = n_taxa
+        data['mainlines_config']['length'] = 50000
     with open('config1.yaml', 'w') as file:
         yaml.safe_dump(data, file)
 
