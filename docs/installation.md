@@ -21,7 +21,7 @@ Requirements:
   	 \- MUSCLE: 5.1
     \- Medaka: 1.11.3
     \- Homopolish: 0.4.1	
-  	 \- uDance: 1.6.5
+  	 \- uDance: 1.6.4
 ```bash
 conda create -n anasfv -c conda-forge python=3.11 -y
 conda activate anasfv
