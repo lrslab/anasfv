@@ -34,7 +34,7 @@ Requirements：
   	 \- MUSCLE: 5.1
    	 \- Medaka: 1.11.3
   	 \- Homopolish: 0.4.1
-  	 \- uDance: 1.6.5
+  	 \- uDance: 1.6.4
  
 Install requirements in conda environment and install ANASFV via PyPI:
 ```
