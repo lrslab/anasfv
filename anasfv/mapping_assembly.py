@@ -70,7 +70,7 @@ if __name__=="__main__":
         command = f'homopolish polish -a {output} -l {ref} -m {homopolish_model} -o homopolish-output'
         conda_env = 'homopolish'
         execute_command_in_conda_env(conda_env, command)
-        subprocess.run(f'cp ./homopolish-output/{strain}_homopolished.fasta {output}', shell=True)
+        subprocess.run(f'cp ./homopolish-output/{strain.split('.')[0]}_homopolished.fasta {output}', shell=True)
     
     
     
