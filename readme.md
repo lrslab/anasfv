@@ -1,7 +1,7 @@
 ## ANASFV
 The **ANASFV** project focuses on analyzing nanopore-sequenced data of PCR-amplified African Swine Fever Virus (ASFV). It consists of 4 tasks:
 
-Task 1: Using ONT reads of PCR-amplified ASFV to assemble a genome.
+Task 1: Using ONT reads of PCR-amplified ASFV to assemble a genome. (This task is optional. If you have already obtained an assembled genome by other methods, you can apply Tasks 2, 3, and 4)
 
 Task 2: Analyzing the completeness of the assembled ASFV genome.
 
