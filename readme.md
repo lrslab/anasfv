@@ -64,18 +64,25 @@ wget https://github.com/lrslab/anasfv/releases/download/test_data.fasta/test_dat
 download_asfv_genome.py
 ```
 ### Task 1 (Assembling a genome):
-Finding nearest genome from "./single_fasta" as ref to perform mapping assebly. Then two rounds of polish.
+Perform mapping assembly and preliminary polish (Finding closest genome from "./single_fasta" as a reference to perform mapping assebly). 
+Using [test_data.fasta](https://github.com/lrslab/anasfv/releases/download/test_data.fasta/test_data.fasta) as example:
 ```
-mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o genome.fasta --medaka r941_min_high_g303 --homopolish R9.4.pkl 
+mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o genome.fasta --medaka r941_min_high_g303
+```
+
+Polish the homopolymers (Select the closest non-ONT sequenced ASFV genome as the reference genome in NCBI by blastn).
+Using MN194591.1.fasta as an example:
+```
+polish_asfv.py -i single_fasta/MN194591.1.fasta -r single_fasta/OR180113.1.fasta -o genome_polished.fasta --homopolish R9.4.pkl 
 ```
 ### Task 2 (Genome completeness evaluation):
 We only established consensus gene sets for genotype I and genotype II. Using -c to assign consensus gene sets.
-Using OQ504956.1.fasta as example：
+Using MN194591.1.fasta as an example：
 ```
-completeness.py single_fasta/OQ504956.1.fasta -c II > OQ504956.1_completeness.tsv
+completeness.py single_fasta/MN194591.1.fasta -c II > MN194591.1_completeness.tsv
 ```
 ### Task 3 (Recombination test):
-Using OQ504956.1 as example：
+Using OQ504956.1 as an example：
 ```
 recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
 recombination_plot.py OQ504956.1_recombination_test.tsv
