@@ -82,6 +82,7 @@ Using MN194591.1.fasta as an example：
 completeness.py single_fasta/MN194591.1.fasta -c II > MN194591.1_completeness.tsv
 ```
 ### Task 3 (Recombination test):
+Checking for any evidence of recombination between genotypes I and II.
 Using OQ504956.1 as an example：
 ```
 recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
