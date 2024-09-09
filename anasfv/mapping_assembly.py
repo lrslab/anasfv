@@ -38,7 +38,7 @@ if __name__=="__main__":
     ref = args.ref
     output = args.output
     medaka_model = args.medaka
-    homopolish_model = args.homopolish
+    # homopolish_model = args.homopolish
     
     if os.path.isdir(ref):
         subprocess.run(f'find_near_ref.py -r {ref} -f {input_reads} -c {num_processes} > near.fasta', shell=True)
