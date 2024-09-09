@@ -34,7 +34,7 @@ if __name__=="__main__":
     ref = args.ref
     homopolish_model = args.model
     
-    command = f'homopolish polish -a {input} -l {ref} -m {homopolish_model} -o {os.path.basename(input)}-homopolish-output'
+    command = f'homopolish polish -a {input} -l {ref} -m {homopolish_model} -o {os.path.basename(input)}-homopolished'
     conda_env = 'homopolish'
     execute_command_in_conda_env(conda_env, command)
     
