@@ -16,7 +16,7 @@ if __name__=="__main__":
     import argparse
 
     example_text = '''example:
-        mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o genome.fasta --medaka r941_min_high_g303 --homopolish R9.4.pkl 
+        mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o genome.fasta --medaka r941_min_high_g303
         '''
 
     parser = argparse.ArgumentParser(prog='mapping_assembly.py',
@@ -30,7 +30,7 @@ if __name__=="__main__":
     parser.add_argument("-r", "--ref", help="a folder containing multiple ASFV genomes, or a single reference sequence file")
     parser.add_argument("-o", "--output", help="assembled ASFV genome")
     parser.add_argument("--medaka", help="medaka model",default=None)
-    parser.add_argument("--homopolish", help="homopolish model",default=None)
+    # parser.add_argument("--homopolish", help="homopolish model",default=None)
 
     args = parser.parse_args(args=None if sys.argv[1:] else ['--help'])
     num_processes = args.processes
@@ -66,11 +66,11 @@ if __name__=="__main__":
         subprocess.run(f'cp ./medaka_result/consensus.fasta {output}', shell=True)
         subprocess.run(f'rm medaka.log {output}.fai {output}.map-ont.mmi', shell=True)
 
-    if homopolish_model:
-        command = f'homopolish polish -a {output} -l {ref} -m {homopolish_model} -o homopolish-output'
-        conda_env = 'homopolish'
-        execute_command_in_conda_env(conda_env, command)
-        subprocess.run(f'cp ./homopolish-output/{strain.split('.')[0]}_homopolished.fasta {output}', shell=True)
+    # if homopolish_model:
+    #     command = f'homopolish polish -a {output} -l {ref} -m {homopolish_model} -o homopolish-output'
+    #     conda_env = 'homopolish'
+    #     execute_command_in_conda_env(conda_env, command)
+    #     subprocess.run(f'cp ./homopolish-output/{strain.split('.')[0]}_homopolished.fasta {output}', shell=True)
     
     
     
