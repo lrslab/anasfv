@@ -26,6 +26,7 @@ setup(
                'anasfv/recombination_test.py',
                'anasfv/get_cds_alignments.py',
                'anasfv/mapping_assembly.py',
+               'anasfv/polish_asfv.py',
                'anasfv/make_tree.py',
                 ]
 )
