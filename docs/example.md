@@ -22,7 +22,7 @@ Or you can run download_asfv_genome.py, which will create a single_fasta directo
 download_asfv_genome.py
 ```
 
-### Task 1 (Assembling a genome):
+## Task 1 (Assembling a genome):
 Using ONT reads of PCR-amplified ASFV to assemble a genome. (This task is optional. If you have already obtained an assembled genome by other methods, you can apply Tasks 2, 3, and 4)
 ```bash
 mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o genome.fasta --medaka r941_min_high_g303
@@ -33,7 +33,7 @@ Polish the homopolymers (Select the closest non-ONT sequenced ASFV genome as the
 polish_asfv.py -i single_fasta/MN194591.1.fasta -r single_fasta/OR180113.1.fasta -m R9.4.pkl
 ```
 
-### Task 2 (Genome completeness evaluation):
+## Task 2 (Genome completeness evaluation):
 We only established consensus gene sets for genotype I and genotype II. Using -c to assign consensus gene sets.
 Using MN194591.1.fasta as an example：
 ```
@@ -47,7 +47,7 @@ Example of result:
 
 
 
-### Task 3 (Recombination test):
+## Task 3 (Recombination test):
 Using OQ504956.1 as example：
 ```bash
 recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
@@ -55,7 +55,7 @@ recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_t
 Recombination plot of OQ504956.1:
 ![Image cannot be loaded](OQ504956.1.png "anasfv")
 
-### Task 4 (Constructing a tree):
+## Task 4 (Constructing a tree):
 Using all genome files from "./single_fasta" and get a final file "tree.nwk" in Newick format
 ```bash
 make_tree.py -f single_fasta -o tree
