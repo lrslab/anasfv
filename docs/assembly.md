@@ -1,8 +1,8 @@
 #  Mapping Assembly
-We provide the [mapping_assembly.py](#mapping_assemblypy) script to perform the entire process from reads to assembled genomes. In addition, we provide [download_asfv_genome.py](#download_asfv_genomepy) to download all latest ASFV genomes from NCBI, and [find_near_ref.py](#find_near_refpy) to select the ASFV genome with the most mapped reads as the reference genome.
+We provide the [mapping_assembly.py](#mapping_assemblypy) script to perform the entire process from reads to assembled genomes. In addition, we provide [polish_asfv.py](#polish_asfvpy) to polish the homopolymers, [download_asfv_genome.py](#download_asfv_genomepy) to download all latest ASFV genomes from NCBI, and [find_near_ref.py](#find_near_refpy) to select the ASFV genome with the most mapped reads as the reference genome.
 ## mapping_assembly.py
 ### Description
-The task requires the ONT reads and a reference sequence. If a reference sequence is specified directly through the -r parameter, it will be used directly. Alternatively, a directory containing multiple reference sequences can also be specified through the -r parameter. We have provided a directory "single_fasta" containing 312 genomes on [github](https://github.com/nimua/single_fasta.git). You can also download the latest ASFV genome by executing download_asfv_genome.py. If a directory is specified through the -r parameter, the genome exhibiting the highest read mapping coverage among all available ASFV genomes will be selected as the reference genome. This reference genome was then utilized for mapping assembly of the sequenced data. The alignment was performed using the minimap2 aligner with the -a option, and ONT reads as input. A consensus sequence was generated using samtools. The consensus sequence was further polished using two rounds of error correction. First, medaka was used. The ONT reads and the initial consensus sequence were provided as input to the medaka_consensus program. Next, homopolish was utilized to perform additional error correction.
+The task requires the ONT reads and a reference sequence. If a reference sequence is specified directly through the -r parameter, it will be used directly. Alternatively, a directory containing multiple reference sequences can also be specified through the -r parameter. We have provided a directory "single_fasta" containing 406 genomes on [github](https://github.com/nimua/single_fasta.git). You can also download the latest ASFV genome by executing download_asfv_genome.py. If a directory is specified through the -r parameter, the genome exhibiting the highest read mapping coverage among all available ASFV genomes will be selected as the reference genome. This reference genome was then utilized for mapping assembly of the sequenced data. The alignment was performed using the minimap2 aligner with the -a option, and ONT reads as input. A consensus sequence was generated using samtools. The consensus sequence was further polished with medaka.
 ### Arguments
 | Argument name	  | Required | Description |
 | --------------  | ----- | -------- |
@@ -11,14 +11,31 @@ The task requires the ONT reads and a reference sequence. If a reference sequenc
 | -r, --ref     |  Yes  | a fasta file of ASFV genome or a folder containing multiple ASFV genomes (if the it is a folder, the program will automatically select the nearest one as the reference)|
 | -o, --output   |  Yes  | file name of the output of assembled ASFV genome  |
 | --medaka      |  No  | medaka model  |
-| --homopolish   |  No  | homopolish model  |
 
 ### Example
 ```bash
-mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o asfv_genome.fasta --medaka r941_min_high_g303 --homopolish R9.4.pkl
+mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o asfv_genome.fasta --medaka r941_min_high_g303
 ```
 ### Output
 A fasta file of the assembled ASFV genome.
+
+------------------------------------
+## polish_asfv.py
+### Description
+Polish the homopolymers by homopolish. It is recommended to choose the closest non-ONT sequenced ASFV genome as the reference genome in NCBI by blastn.
+### Arguments
+| Argument name	  | Required | Description |
+| --------------  | ----- | -------- |
+| -i,	--input   |  Yes  | fasta file of input ASFV genome |
+| -r, --ref     |  Yes  | fasta file of reference ASFV genome |
+| -m, --model   |  Yes  | model used in homopolish |
+
+### Example
+```bash
+polish_asfv.py -i single_fasta/MN194591.1.fasta -r single_fasta/OR180113.1.fasta -m R9.4.pkl
+```
+### Output
+Polished ASFV genome in the current working directory.
 
 ------------------------------------
 ## download_asfv_genome.py
