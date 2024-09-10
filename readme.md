@@ -75,12 +75,20 @@ Using MN194591.1.fasta as an example:
 ```
 polish_asfv.py -i single_fasta/MN194591.1.fasta -r single_fasta/OR180113.1.fasta -m R9.4.pkl
 ```
+
 ### Task 2 (Genome completeness evaluation):
 We only established consensus gene sets for genotype I and genotype II. Using -c to assign consensus gene sets.
 Using MN194591.1.fasta as an example：
 ```
 completeness.py single_fasta/MN194591.1.fasta -c II > MN194591.1_completeness.tsv
 ```
+Example of result:
+
+| file_name |	size |	prodigal_gene_num |	with_MGF |	without_MGF |
+| --------------  | ----- | -------- | -------- | -------- |
+| MN194591.1.fasta |	191911 |	242 |	C:57.43%[D:0.0%],F:39.19%,M:3.38%,n:148 |	C:51.3%[D:0.0%],F:44.35%,M:4.35%,n:115 |
+
+
 ### Task 3 (Recombination test):
 Checking for any evidence of recombination between genotypes I and II.
 Using OQ504956.1 as an example：
@@ -88,10 +96,14 @@ Using OQ504956.1 as an example：
 recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
 recombination_plot.py OQ504956.1_recombination_test.tsv
 ```
+Recombination plot of OQ504956.1:
+![Image cannot be loaded](./docs/OQ504956.1.png)
 ### Task 4 (Constructing a tree):
 Building the tree with the following command. It will use all genome files from "./single_fasta" and get a tree in Newick format.
 ```
 make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance --iteration
 ```
 
+Phylogenetic tree using [single_fasta](https://github.com/nimua/single_fasta.git) (visualized by iTOL):
+![Image cannot be loaded](./docs/tree.png)
 
