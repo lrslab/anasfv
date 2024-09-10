@@ -59,7 +59,7 @@ The tree building process uses uDance. For uDance installation refer to [uDance]
 ```
 wget https://github.com/lrslab/anasfv/releases/download/test_data.fasta/test_data.fasta
 ```
-2. Other ASFV genomes. These genomes are used for mapping assembly and tree building. You can directly use the [single_fasta](https://github.com/nimua/single_fasta.git), which contains 312 downloaded ASFV genomes, or you can run download_asfv_genome.py, which will create a directory name "single_fasta" and download all the latest ASFV genomes on NCBI to the directory.
+2. Other ASFV genomes. These genomes are used for mapping assembly and tree building. You can directly use the [single_fasta](https://github.com/nimua/single_fasta.git), which contains 406 downloaded ASFV genomes, or you can run download_asfv_genome.py, which will create a directory name "single_fasta" and download all the latest ASFV genomes on NCBI to the directory.
 ```
 download_asfv_genome.py
 ```
