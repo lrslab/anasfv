@@ -29,14 +29,14 @@ mapping_assembly.py -p 4 -r single_fasta -i test_data.fasta -o genome.fasta --me
 ```
 
 Polish the homopolymers (Select the closest non-ONT sequenced ASFV genome as the reference genome in NCBI by blastn). Using MN194591.1.fasta as an example:
-```
+```bash
 polish_asfv.py -i single_fasta/MN194591.1.fasta -r single_fasta/OR180113.1.fasta -m R9.4.pkl
 ```
 
 ## Task 2 (Genome completeness evaluation):
 We only established consensus gene sets for genotype I and genotype II. Using -c to assign consensus gene sets.
 Using MN194591.1.fasta as an example：
-```
+```bash
 completeness.py single_fasta/MN194591.1.fasta -c II > MN194591.1_completeness.tsv
 ```
 Example of result:
