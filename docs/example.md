@@ -51,6 +51,7 @@ Example of result:
 Using OQ504956.1 as example：
 ```bash
 recombination_test.py single_fasta/OQ504956.1.fasta > OQ504956.1_recombination_test.tsv
+recombination_plot.py OQ504956.1_recombination_test.tsv
 ```
 Recombination plot of OQ504956.1:
 ![Image cannot be loaded](OQ504956.1.png "anasfv")
