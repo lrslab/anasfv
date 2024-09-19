@@ -59,7 +59,7 @@ Recombination plot of OQ504956.1:
 ## Task 4 (Constructing a tree):
 Using all genome files from "./single_fasta" and get a final file "tree.nwk" in Newick format
 ```bash
-make_tree.py -f single_fasta -o tree
+make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance --iteration
 ```
 
 Phylogenetic tree using [single_fasta](https://github.com/nimua/single_fasta.git) (visualized by iTOL):
