@@ -31,7 +31,7 @@ pip install anasfv
 
 If you need to use medaka and homopolish for polish, you need to create their corresponding conda environments and install them, because there will be some conflicts if you install them directly in the ANASFV runtime environment.
 ```bash
-conda create -n medaka -c bioconda -c conda-forge medaka -y
+conda create -n medaka -c bioconda -c conda-forge medaka=1.11.3 -y
 conda config --set channel_priority flexible
 conda create -n homopolish -c conda-forge -c bioconda -c defaults more-itertools=8.4.0 homopolish=0.4.1 -y
 ```
