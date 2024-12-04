@@ -15,7 +15,7 @@ An ASFV genome file.
 completeness.py single_fasta/OM966717.1.fasta -c II > OM966717.1_completeness.tsv
 ```
 ### Output
-A 5-column tsv table, the 5 fields are **file name**, **genome size**, **gene number by prodigal**, **completeness evaluation with MGF genes** and **completeness evaluation without MGF genes**. The following table is a partial example of a the output.
+A 5-column tsv table, the 5 fields are **file name**, **genome size**, **gene number by prodigal**, **completeness evaluation with MGF genes** and **completeness evaluation without MGF genes**. The following table is a partial example of the output.
 
 | file_name  |  size  |  prodigal_gene_num    |   with_MGF    |  without_MGF |
 | ---------  | ------ | ----------------------| ------------  | ------------ |
