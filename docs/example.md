@@ -1,6 +1,13 @@
-# Example Projects
-## Docker
-Using Docker is more convenient, eliminating the troublesome of installation steps. So we provide a docker image:
+# Examples Project
+This example will demonstrate:
+1. Genome assembly (output assembled genome in fasta format)
+2. Genome completeness evaluation (output completeness notation)
+3. Recombination test (output recombination test table and plot)
+4. Tree construction (output phylogenetic tree file in nwk format)
+Detailed instructions can be found later
+
+## Docker (Optional)
+We provide a docker image to eliminating the troublesome installation steps:
 ```bash
 docker pull osvolo/anasfv:latest
 docker container run -it osvolo/anasfv /bin/bash
@@ -13,7 +20,7 @@ The test files are already included in the docker container. If you don't use Do
 wget https://github.com/lrslab/anasfv/releases/download/test_data.fasta/test_data.fasta
 ```
 
-② Other ASFV genomes. These genomes are used for mapping assembly and tree building. You can directly use the single_fasta directory in this project, which contains 406 downloaded ASFV genomes.
+② Other ASFV genomes. You can directly use the single_fasta directory in this project, which contains 406 downloaded ASFV genomes.
 ```bash
 git clone https://github.com/nimua/single_fasta.git
 ```
@@ -21,6 +28,7 @@ Or you can run download_asfv_genome.py, which will create a single_fasta directo
 ```bash
 download_asfv_genome.py
 ```
+These genomes are used for mapping assembly and tree building. 
 
 ## Task 1 (Assembling a genome):
 Using ONT reads of PCR-amplified ASFV to assemble a genome. (This task is optional. If you have already obtained an assembled genome by other methods, you can apply Tasks 2, 3, and 4)
