@@ -1,7 +1,7 @@
 # Installation
 
 ## Docker
-Using Docker is more convenient, eliminating the troublesome of installation steps. So we provide a docker image:
+We provide a docker image to eliminating the troublesome installation steps:
 ```bash
 docker pull osvolo/anasfv:latest
 docker container run -it osvolo/anasfv /bin/bash
