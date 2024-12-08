@@ -7,7 +7,7 @@ This example will demonstrate:
 Detailed instructions can be found later
 
 ## Docker (Optional)
-We provide a docker image to eliminating the troublesome installation steps:
+We provide a docker image to make the installation steps more convenient:
 ```bash
 docker pull osvolo/anasfv:latest
 docker container run -it osvolo/anasfv /bin/bash
