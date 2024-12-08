@@ -3,7 +3,7 @@ site_name: ANASFV
 nav:
   - Home: index.md
   - Installation: installation.md
-  - Example Projects : example.md
+  - Example Project : example.md
   - Mapping Assembly: assembly.md
   - Genome Completeness Evaluation: completeness.md
   - Recombination Test : recombination.md
