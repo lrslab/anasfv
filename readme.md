@@ -78,15 +78,15 @@ polish_asfv.py -i single_fasta/MN194591.1.fasta -r single_fasta/OR180113.1.fasta
 
 ### Task 2 (Genome completeness evaluation):
 We only established consensus gene sets for genotype I and genotype II. Using -c to assign consensus gene sets.
-Using MN194591.1.fasta as an example：
+Using OM966717.1.fasta as an example：
 ```
-completeness.py single_fasta/MN194591.1.fasta -c II > MN194591.1_completeness.tsv
+completeness.py single_fasta/OM966717.1.fasta -c II > OM966717.1_completeness.tsv
 ```
 Example of result:
 
-| file_name |	size |	prodigal_gene_num |	with_MGF |	without_MGF |
-| --------------  | ----- | -------- | -------- | -------- |
-| MN194591.1.fasta |	191911 |	242 |	C:57.43%[D:0.0%],F:39.19%,M:3.38%,n:148 |	C:51.3%[D:0.0%],F:44.35%,M:4.35%,n:115 |
+| file_name  |  size  |  prodigal_gene_num    |   with_MGF    |  without_MGF | duplicate_genes | fragmented_genes | missing_genes|
+| ---------  | ------ | ----------------------| ------------  | ------------ | ------------  | ------------ | ------------  |
+| OM966717.1.fasta |  189125  | 168   |  C:99.32%[D:0.0%],F:0.68%,M:0.0%,n:148 |  C:99.13%[D:0.0%],F:0.87%,M:0.0%,n:115 |  | C122R |  |
 
 
 ### Task 3 (Recombination test):
