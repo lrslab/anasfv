@@ -5,7 +5,7 @@ import os
 import subprocess
 import pandas as pd
 import pkgutil
-
+from collections import Counter
 
 def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):       
     consensusfile = f'./consensus_ffn/type{consensus_use}_consensus'
@@ -37,6 +37,7 @@ def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
     l_Fragmented = []
 
     df_querys = df_querys.reset_index()
+    
     for i in range(df_querys.shape[0]):
         if not with_MGF and 'MGF' in df_querys['Subject_id'][i]:
             pass
@@ -46,6 +47,8 @@ def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
             l_Fragmented.append(df_querys['Subject_id'][i])
 
     l_Fragmented = list(set(l_Fragmented) - set(l_Complete))
+    l_Duplicate= [element for element, count in Counter(l_Complete).items() if count > 1]
+    l_Missing=[i for i in total_genes if not i in l_Fragmented+l_Complete]
     nComplete = len(set(l_Complete))
     nDuplicate = len(l_Complete) - nComplete
     nFragmented = len(set(l_Fragmented))
@@ -54,9 +57,9 @@ def cal_BUSCO(consensus_use, prodigal_file, with_MGF=True):
     duplicate_percentage = round((nDuplicate / total) * 100, 2)
     fragmented_percentage = round((nFragmented / total) * 100, 2)
     missing_percentage = round((nMissing / total) * 100, 2)
-
+    
     busco = f'C:{complete_percentage}%[D:{duplicate_percentage}%],F:{fragmented_percentage}%,M:{missing_percentage}%,n:{total}'
-    return busco
+    return busco,', '.join(l_Fragmented),', '.join(l_Duplicate),', '.join(l_Missing)
 
 def run_blast(strain, consensus_use):
 
@@ -103,11 +106,11 @@ if __name__ =='__main__':
     
     run_blast(single_fasta,consensus_use)
 
-    print('file_name\tsize\tprodigal_gene_num\twith_MGF\twithout_MGF')
+    print('file_name\tsize\tprodigal_gene_num\twith_MGF\twithout_MGF\tduplicate_genes\tfragmented_genes\tmissing_genes')
 
     file = f'./prodigal_result/{single_fasta}.fna'
     prodigal_file = list(SeqIO.parse(file, "fasta"))
     size = len(SeqIO.read(input_path, "fasta"))
-    busco = cal_BUSCO(consensus_use, prodigal_file)
-    busco_without_MGF = cal_BUSCO(consensus_use, prodigal_file, with_MGF=False)
-    print(f'{single_fasta}\t{size}\t{len(prodigal_file)}\t{busco}\t{busco_without_MGF}')
+    busco,fragmented_genes,duplicate_genes,missing_genes = cal_BUSCO(consensus_use, prodigal_file)
+    busco_without_MGF = cal_BUSCO(consensus_use, prodigal_file, with_MGF=False)[0]
+    print(f'{single_fasta}\t{size}\t{len(prodigal_file)}\t{busco}\t{busco_without_MGF}\t{duplicate_genes}\t{fragmented_genes}\t{missing_genes}')
