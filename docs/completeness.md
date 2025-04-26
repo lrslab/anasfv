@@ -17,8 +17,8 @@ completeness.py single_fasta/OM966717.1.fasta -c II > OM966717.1_completeness.ts
 ### Output
 A 5-column tsv table, the 5 fields are **file name**, **genome size**, **gene number by prodigal**, **completeness evaluation with MGF genes** and **completeness evaluation without MGF genes**. The following table is a partial example of the output.
 
-| file_name  |  size  |  prodigal_gene_num    |   with_MGF    |  without_MGF |
-| ---------  | ------ | ----------------------| ------------  | ------------ |
-| OM966717.1.fasta |  189125  | 168   |  C:99.32%[D:0.0%],F:0.68%,M:0.0%,n:148 |  C:99.13%[D:0.0%],F:0.87%,M:0.0%,n:115 |
+| file_name  |  size  |  prodigal_gene_num    |   with_MGF    |  without_MGF | duplicate_genes | fragmented_genes | missing_genes|
+| ---------  | ------ | ----------------------| ------------  | ------------ | ------------  | ------------ | ------------  |
+| OM966717.1.fasta |  189125  | 168   |  C:99.32%[D:0.0%],F:0.68%,M:0.0%,n:148 |  C:99.13%[D:0.0%],F:0.87%,M:0.0%,n:115 |  | C122R |  |
 
 The completeness evaluation is a BUSCO like notation, with C:complete [D:duplicated], F:fragmented, M:missing, n:number of genes used. If a consensus CDS term can find a mapping from the predicted gene sequences with an identity larger than 90%, together with a unique mapping length longer than 90%, it can be considered "complete." A consensus CDS term that cannot find a valid mapping (with an identity greater than 30% and a mapping length greater than 30%) in the predicted genes is considered "missing". The other consensus CDS with partial hit is termed "fragmented". The "duplicated" term means that there is more than one 'complete' hit in the predicted gene sequences.
