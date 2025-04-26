@@ -16,7 +16,7 @@ setup(
     long_description=LONG_DESC,
     long_description_content_type='text/markdown',
     install_requires = ["biopython>=1.8.1",
-                        "pandas>=2.0.3",
+                        "pandas==2.1.4",
                         "pyyaml>=5.3.1",
                         "pycirclize>=1.6.0"],
     include_package_data=True,
