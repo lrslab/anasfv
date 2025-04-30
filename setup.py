@@ -5,7 +5,7 @@ with open('readme.md', "r") as f:
     LONG_DESC = f.read()
 
 setup(
-    name='ANASFV',
+    name='anasfv',
     version=__version__,
     packages=["anasfv"],
     url='https://github.com/lrslab/anasfv',
