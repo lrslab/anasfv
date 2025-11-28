@@ -104,6 +104,11 @@ Building the tree with the following command. It will use all genome files from 
 make_tree.py -p 4 -f single_fasta -o tree --udance ./uDance --iteration
 ```
 
+
 Phylogenetic tree using [single_fasta](https://github.com/nimua/single_fasta.git) (visualized by iTOL):
 ![Image cannot be loaded](./docs/tree.png)
 
+## Citation
+Please cite our mauscript if you find anasfv useful
+
+Li, K., Han, X., Shao, Y., Wu, X., Zhao, X., Johnson, E.W. and Li, R., 2025. ANASFV: a workflow for African swine fever virus whole-genome analysis. **Microbial Genomics**, 11(9), p.001455.
